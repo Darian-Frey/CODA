@@ -1,0 +1,97 @@
+cff-version: 1.2.0
+message: "If you use CODA in your research, please cite it as below."
+type: software
+
+title: "Project CODA: Complexity-Originated Dynamics of Action"
+abstract: >
+  A covariant field-theoretic extension of General Relativity coupling
+  spacetime curvature to a Krylov Complexity Density. Derives modified
+  Einstein field equations from a Hilbert-Complexity Action, establishes
+  ghost mass and EFT consistency conditions against Stelle (1977), and
+  targets MOND rotation curve phenomenology via a Tier 1 modular Krylov
+  construction.
+
+authors:
+  - family-names: "Hartley"
+    given-names: "Shane"
+    email: "shane.hartley06@gmail.com"
+
+version: "0.1"
+date-released: "2026-04-01"
+license: MIT
+
+repository-code: "https://github.com/Darian-Frey/CODA"
+
+keywords:
+  - quantum gravity
+  - Krylov complexity
+  - modified gravity
+  - MOND
+  - Einstein-Weyl gravity
+  - Bach tensor
+  - covariant field theory
+  - emergent gravity
+
+references:
+  - type: article
+    title: "Renormalization of Higher-Derivative Quantum Gravity"
+    authors:
+      - family-names: "Stelle"
+        given-names: "K. S."
+    journal: "Physical Review D"
+    volume: 16
+    pages: "953"
+    year: 1977
+    doi: "10.1103/PhysRevD.16.953"
+    notes: >
+      Primary source for ghost mass formula, Newtonian potential
+      correction, and Weyl identity used in CODA Tier 2.
+
+  - type: article
+    title: "A New Relativistic Theory for Modified Newtonian Dynamics"
+    authors:
+      - family-names: "Skordis"
+        given-names: "Constantinos"
+      - family-names: "Złośnik"
+        given-names: "Tom"
+    journal: "Physical Review Letters"
+    volume: 127
+    pages: "161302"
+    year: 2021
+    doi: "10.1103/PhysRevLett.127.161302"
+    notes: >
+      AeST theory — structural target for CODA's MOND thread.
+      Ghost-free covariant MOND compatible with CMB.
+
+  - type: article
+    title: "Emergent Gravity and the Dark Universe"
+    authors:
+      - family-names: "Verlinde"
+        given-names: "Erik"
+    journal: "SciPost Physics"
+    volume: 2
+    pages: "016"
+    year: 2017
+    doi: "10.21468/SciPostPhys.2.3.016"
+    notes: >
+      Information-theoretic derivation of a_0 ~ c H_0 from de Sitter
+      entanglement entropy. Closest existing bridge between entropy
+      and MOND phenomenology.
+
+  - type: article
+    title: >
+      Krylov Complexity in Quantum Field Theory, and Beyond
+    authors:
+      - family-names: "Avdoshkin"
+        given-names: "Alexander"
+      - family-names: "Dymarsky"
+        given-names: "Anatoly"
+      - family-names: "Smolkin"
+        given-names: "Michael"
+    journal: "Journal of High Energy Physics"
+    year: 2024
+    doi: "10.1007/JHEP06(2024)066"
+    notes: >
+      Foundational work on Krylov complexity for local operators
+      in continuum QFT. Establishes Lanczos coefficient growth
+      behaviour used in CODA's Tier 1 construction programme.

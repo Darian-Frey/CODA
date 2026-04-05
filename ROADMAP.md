@@ -85,23 +85,39 @@ This is the hardest theoretical problem in CODA and the gate that all
 subsequent phases pass through. It is documented in full in
 `theory/covariant_ck.md`.
 
-### Phase 3a — de Sitter Krylov Complexity (ACCESSIBLE NOW)
+### Phase 3a — de Sitter Krylov Complexity (REVISED — see audit/llm_synthesis/Q4_dS_Krylov.md)
 
-This sub-phase does **not** require the full Tier 1 construction and
-can begin immediately. It uses existing techniques from quantum
-information theory and holography.
+**Status:** Programme revised following Q4 research session (April 2026).
+The original formulation (free scalar, modular flow, Lanczos transition)
+was found to be insufficient. A free scalar in the dS static patch has
+**bounded** Lanczos coefficients — no linear growth, no $a_0$ emergence.
+The calculation must target strongly-coupled holographic de Sitter
+(DSSYK) rather than free fields.
+
+**Key finding from Q4:** The exact modular Krylov calculation in the dS
+static patch has not been done for any system. For free scalars, $b_n$
+is bounded by $\sim H_0$ and $K(t)$ saturates at $t \sim H_0^{-1}$.
+For chaotic/holographic dS, $b_n \sim H_0 n$ (chaos bound at $T_{dS}$),
+which would give $a_0 \sim cH_0$ — but this calculation doesn't yet exist.
+The DSSYK holographic programme (arXiv:2510.13986, 2403.13186) is the
+correct computational target.
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| Compute Krylov complexity of a scalar field operator under modular flow in de Sitter static patch | **1** | Uses known de Sitter two-point function; standard Lanczos algorithm |
-| Identify transition from linear to sublinear $b_n$ growth rate | **2** | Tests whether transition scale is $\sim H_0^{-1}$ |
-| Check whether transition produces $a_0 \sim cH_0$ | **3** | Core test of CODA's MOND hypothesis |
-| Compare with Verlinde's $a_0 = cH_0/(2\pi)$ prediction | **4** | Determines $O(1)$ factor $\eta$ |
+| Read DSSYK holographic dS papers (arXiv:2510.13986, 2403.13186, 2508.10093) | **1 — immediate** | Most relevant existing Krylov-dS results |
+| Identify modular Krylov spectrum in DSSYK boundary QM | **2** | Tractable with existing DSSYK technology |
+| Check whether rate $\alpha \sim H_0$ appears in modular evolution | **3** | Follows from chaos bound if theory is chaotic |
+| Determine whether AQUAL nonlinear structure emerges from $K(t)$ | **4** | Core CODA prediction — key step |
+| Free scalar modular Krylov in dS static patch (parallel track) | **5** | Worthwhile but insufficient for $a_0$ derivation |
 
-**Why this is the right place to start:** If Krylov complexity in de
-Sitter does NOT produce a transition at $\sim cH_0$, the MOND thread
-hypothesis is falsified and CODA must revise its approach to galactic
-phenomenology. Better to know early.
+**What has been ruled out:** The free-scalar modular Krylov calculation
+cannot produce $a_0 \sim cH_0$. This is recorded in the ruled-out table.
+
+**Closest existing result:** Adhikari et al. (arXiv:2203.14330) computed
+Krylov complexity for inflationary-patch scalar perturbations (Heisenberg
+evolution, not modular) and found $\alpha \sim H$ — partial evidence that
+the Hubble scale governs complexity rates in dS, but not the required
+modular static-patch calculation.
 
 ### Phase 3b — Covariant Construction (REQUIRES RESEARCH BREAKTHROUGHS)
 
@@ -178,6 +194,7 @@ The following ideas were pursued and abandoned with documented reasons:
 | GW250114 echo prediction (CODE-GEO) | LVK spectroscopy paper; residual SNR 6.86 p=0.34 | CODE-GEO audit |
 | $\Lambda_C = 64\pi G\xi$ | Stelle (1977) $\kappa^2$ convention | `field_equations.md` v0.2 §1 |
 | $-4B_{\mu\nu}$ variation coefficient | Consistency with conformal gravity EOM and Stelle (1977) | `action_principle.md` v0.2 §2.2 |
+| Free scalar modular Krylov in dS producing $a_0 \sim cH_0$ | Q4 session: free scalars have bounded $b_n$, no linear growth, no $a_0$ | `audit/llm_synthesis/Q4_dS_Krylov.md` |
 
 ---
 

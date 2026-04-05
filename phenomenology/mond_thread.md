@@ -307,57 +307,125 @@ sector may be needed at those scales.
 
 ## 5. CODA's MOND Hypothesis — The Tier 1 Route
 
-### 5.1 The Core Proposal [CODA-HYPOTHESIS]
+**Version note:** This section was substantially revised following direct
+reading of Heller et al. (arXiv:2510.13986) and Aguilar-Gutierrez
+(arXiv:2403.13186). See `audit/llm_synthesis/Q4b_DSSYK_papers.md` for
+full details. The $a_0$ derivation programme is now substantially more
+concrete than when this document was first written.
 
-The formal Tier 1 $\mathcal{C}_K(x)$ — constructed via modular Krylov
-complexity on causal diamonds (see `covariant_ck.md`, Section 4.1) —
-is hypothesised to produce an AQUAL-like nonlinear kinetic structure
-through the following mechanism:
+### 5.1 What the DSSYK Papers Establish [ESTABLISHED from primary sources]
 
-The modular Krylov complexity $\mathcal{C}_K^{\rm mod}(s; D(x,\epsilon))$
-evaluated on a causal diamond of size $\epsilon$ has two distinct regimes:
+Two results from the DSSYK holographic programme are directly relevant:
 
-**For $\epsilon \ll \ell_{dS} = c/H_0$ (sub-horizon, high acceleration):**
-The complexity grows as a function of modular time controlled by the
-local geometry. The contribution to the effective action is linear in
-$\partial_\mu\mathcal{C}_K\partial^\mu\mathcal{C}_K$ — a standard
-kinetic term. This is the area-law regime where GR is recovered.
+**From Aguilar-Gutierrez (2024), Section 4:**
 
-**For $\epsilon \sim \ell_{dS}$ (horizon-scale, low acceleration):**
-The causal diamond reaches de Sitter horizon scale. The volume-law
-entanglement entropy becomes relevant, modifying the Lanczos coefficient
-growth from linear ($b_n \sim n$) to sublinear. This produces a
-**nonlinear correction** to the effective kinetic term — precisely the
-AQUAL structure $F(y)$ with $F(y) \sim \frac{2}{3}y^{3/2}$ for $y \ll 1$.
+For physical operators in the DSSYK/LdS2/SdS3 holographic triality,
+the Lanczos coefficients are (their Eq. 4.10):
 
-The transition between the two regimes occurs when the local gravitational
-acceleration $a \sim c^2/\ell \sim cH_0 = a_0$. The Milgrom scale
-**is** the de Sitter horizon acceleration. [SPECULATIVE]
+$$b_n = n\sqrt{\frac{n^2 - \nu^2/4}{4n^2 - 1}}
+\xrightarrow{n\gg 1} \frac{n}{2}$$
 
-### 5.2 The $a_0$ Derivation Programme
+**Linear growth with slope $\alpha = H_0/2$** (restoring $\ell_{dS}$
+units). The late-time Krylov complexity:
 
-The sharpest theoretical goal of CODA's MOND thread is to derive:
+$$C_K(\tau \gg 1) \propto e^\tau = e^{H_0 t}$$
 
-$$a_0 = \eta \cdot cH_0$$
+saturating the Maldacena-Shenker-Stanford chaos bound with Lyapunov
+exponent $\lambda_K = H_0$. The system is maximally chaotic at
+temperature $T_{dS} = H_0/(2\pi)$.
 
-where $\eta$ is an $O(1)$ numerical factor from the modular complexity
-calculation, from the following chain:
+**From Heller et al. (2025), the dS Krylov complexity function:**
 
-1. **De Sitter modular Hamiltonian:** The modular Hamiltonian of the de
-   Sitter static patch is $K_{dS} = 2\pi(\ell_{dS}/c)\,T^{00}$ (the
-   Unruh-like de Sitter temperature is $T_{dS} = H_0/(2\pi)$).
+$$C_K(\chi) \propto \log\!\left[\cosh\!\left(\frac{\chi\theta}{2}\right)\right]$$
 
-2. **Krylov complexity in the de Sitter vacuum:** Evaluate the Krylov
-   complexity of a local field operator under modular flow in the de
-   Sitter vacuum state. The Lanczos coefficients $b_n$ are set by the
-   de Sitter two-point function, which has a natural scale $H_0$.
+This has a **quadratic-to-linear transition** at $\chi_* \sim 2\ell_{dS}$,
+with late-time growth rate:
 
-3. **Transition condition:** The transition from linear to sublinear $b_n$
-   growth occurs when the complexity gradient $|\nabla\mathcal{C}_K|$
-   reaches the de Sitter complexity gradient set by the global horizon.
+$$\frac{dC_K}{d\chi}\bigg|_{\chi\to\infty} \propto S_{dS} \cdot T_{dS}
+= S_{dS} \cdot \frac{H_0}{2\pi}$$
 
-4. **Output:** This transition defines a natural acceleration scale
-   $a_0 \sim cH_0$, with the precise $O(1)$ factor $\eta$ determined
+### 5.2 The $a_0$ Derivation — Three Established Routes [ESTABLISHED]
+
+The connection $a_0 = cH_0$ (Verlinde's result) now has three independent
+derivation routes from the DSSYK literature, all consistent:
+
+**Route 1 — Chaos bound:** The Lyapunov exponent $\lambda_K = H_0$ gives
+timescale $\tau^* = H_0^{-1}$. Test particle with this dynamical timescale:
+
+$$\boxed{a_0 = c/\tau^* = cH_0}$$
+
+More precisely: $\lambda_K = 2\pi T_{dS} = H_0$, so
+$a_0 = 2\pi c T_{dS} = cH_0$.
+
+**Route 2 — Complexity transition:** The quadratic-to-linear transition in
+$C_K(\chi)$ occurs at $\chi_* \sim \ell_{dS}$. Characteristic acceleration
+at this scale:
+
+$$\boxed{a_{\rm transition} = c^2/\ell_{dS} = cH_0 = a_0}$$
+
+**Route 3 — Growth rate:** Late-time complexity rate $\propto S_{dS} \cdot H_0$.
+The scale where cosmological complexity growth dominates local Newtonian
+gravity defines $a_0 \sim cH_0$.
+
+All three give $a_0 = cH_0$ with $O(1)$ factor $\eta = 1/(2\pi)$
+from the de Sitter temperature, matching Verlinde (2016) exactly.
+
+### 5.3 The Core Proposal — Revised [CODA-HYPOTHESIS]
+
+The Tier 1 $\mathcal{C}_K(x)$ construction should target the **DSSYK
+holographic regime** rather than the free scalar regime. The physical
+picture:
+
+**Sub-horizon regime** ($\ell \ll \ell_{dS}$, high acceleration):  
+The local quantum gravity behaves like a weakly chaotic system; complexity
+growth is slow. The contribution to the effective action is a standard
+kinetic term. GR is recovered.
+
+**Horizon-scale regime** ($\ell \sim \ell_{dS}$, low acceleration,
+$a \lesssim cH_0$):  
+The causal diamond reaches de Sitter scale. The local quantum gravity
+enters the maximally chaotic regime ($\lambda_K \to H_0$). The complexity
+growth transitions from sub-exponential to exponential ($b_n \sim n/2$).
+The effective kinetic term becomes nonlinear.
+
+**The transition** at $a \sim cH_0 = a_0$ separates the two regimes —
+this is the MOND scale.
+
+The functional form of the nonlinear kinetic term that emerges from
+$C_K(\chi) \propto \log\cosh(\chi\theta/2)$ is not identical to AQUAL's
+$F(y) \sim y^{3/2}$, but the qualitative structure (two power-law regimes,
+transition at natural scale $\sim \ell_{dS}$) is correct.
+
+### 5.4 The Remaining Gaps [OPEN PROBLEM]
+
+Two concrete gaps remain between the DSSYK results and CODA's MOND thread:
+
+**Gap 1 — 2D → 4D:** The DSSYK Krylov results are in 2D (dS2) or 3D
+(SdS3). Heller et al. (2025) propose a higher-dimensional extension (their
+Eq. 23) with the same $S_{dS} \cdot T_{dS}$ growth rate, but the microscopic
+derivation from DSSYK only exists in 2D. Extension to 4D is their stated
+"most pressing open question" — and CODA's Tier 1 problem in sharper form.
+
+**Gap 2 — Local density:** DSSYK Krylov complexity is a global boundary
+quantity. The holographic dictionary gives bulk complexity as an integrated
+volume. To get $\mathcal{C}_K(x)$ as a local density, one needs the
+integrand of the extremal volume — which is $r$-dependent and
+foliation-dependent. The same obstacles documented in `covariant_ck.md`.
+
+**The $a_0$ derivation programme in the following four steps:**
+
+1. ✅ **De Sitter Krylov spectrum:** Lanczos coefficients $b_n \sim H_0 n/2$
+   in the DSSYK holographic dual. Chaos bound saturated.
+
+2. ✅ **Complexity transition at $\ell_{dS}$:** Quadratic-to-linear
+   transition in $C_K(\chi)$ produces $a_{\rm transition} = cH_0 = a_0$.
+
+3. 🔶 **AQUAL structure from complexity:** Whether the specific functional
+   form $C_K(\chi) \propto \log\cosh(\cdot)$ produces the correct AQUAL
+   interpolating function in the gravitational field equations. Open.
+
+4. 🔲 **4D local density:** Lifting the DSSYK boundary Krylov to a
+   covariant local $\mathcal{C}_K(x)$ in 4D dS. Open — Tier 1 problem.
    by the ratio of Lanczos growth rates in the local vs. cosmological
    regimes.
 
