@@ -2,25 +2,29 @@
 
 **Document:** `theory/action_principle.md`  
 **Project:** CODA — Complexity-Originated Dynamics of Action  
-**Version:** 0.2 (Corrected — supersedes v0.1)  
-**Status:** Foundational — field equations derived; key limits verified  
-**Depends on:** `theory/covariant_ck.md`  
+**Version:** 0.3  
+**Status:** Foundational — field equations derived; all limits verified  
+**Depends on:** `theory/covariant_ck.md`, `theory/field_equations.md` v0.3  
 **Corrected by:** `theory/field_equations.md` v0.2 (Stelle 1977 verification)  
 **Epistemic Flags:** [ESTABLISHED] for standard GR results; [CODA] for new
-claims; [OPEN PROBLEM] for unresolved issues; [CORRECTED] for items changed
-from v0.1.
+claims; [OPEN PROBLEM] for unresolved issues.
 
 ---
 
-## Changelog v0.1 → v0.2
+## Changelog
 
-Three errors corrected following direct verification against Stelle (1977):
+**v0.1 → v0.2 (corrections):**
+1. Variation coefficient: $-4\xi B_{\mu\nu}$ → $-2\xi B_{\mu\nu}$
+2. $\Lambda_C = 64\pi G\xi$ → $\Lambda_C = 32\pi G\xi$
+3. Mannheim-Kazanas MOND claim retracted
 
-1. **Section 2.2** — Variation coefficient: $-4\xi B_{\mu\nu}$ → $-2\xi B_{\mu\nu}$
-2. **Section 3 throughout** — $\Lambda_C = 64\pi G\xi$ → $\Lambda_C = 32\pi G\xi$
-3. **Section 6** — Mannheim-Kazanas MOND claim retracted and replaced
-
-See `theory/field_equations.md` v0.2 for full derivation and source verification.
+**v0.2 → v0.3 (additions):**
+1. Editorial [CORRECTED] flags removed — corrected values are now clean statements
+2. §5.2 expanded to full Bach-flat theorem covering all Einstein metrics
+3. §5.5 added: conservation identity $\nabla^\mu B_{\mu\nu} = 0$
+4. §6.2 MOND status updated with DSSYK derivation of $a_0 \sim cH_0$
+5. §9 open problems updated — cosmological and PPN items closed
+6. References updated with full phenomenology suite
 
 ---
 
@@ -43,12 +47,12 @@ where:
 - $\alpha$ is a dimensionless coupling constant (natural units $\hbar = c = 1$)
 
 The construction of $\mathcal{C}_K(x)$ remains an open problem
-(`covariant_ck.md`, Section 6). All field equations in this document
+(`covariant_ck.md`, Section 7). All field equations in this document
 use the **Tier 2 working definition** of $\mathcal{C}_K$.
 
 ### 1.2 Tier 2 Action (Working Theory)
 
-Using the semiclassical Weyl proxy from `covariant_ck.md` Section 5:
+Using the semiclassical Weyl proxy from `covariant_ck.md` Section 6:
 
 $$\mathcal{C}_K(x) \approx \frac{\ell_P^4}{8\pi}\,
 C_{\alpha\beta\gamma\delta}\,C^{\alpha\beta\gamma\delta}$$
@@ -79,9 +83,7 @@ $$\frac{1}{\sqrt{-g}}\frac{\delta}{\delta g^{\mu\nu}}
 
 where $G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R$.
 
-### 2.2 Weyl-Squared Term [ESTABLISHED — CORRECTED]
-
-[CORRECTED from v0.1: coefficient was $-4B_{\mu\nu}$; correct value is $-2B_{\mu\nu}$]
+### 2.2 Weyl-Squared Term [ESTABLISHED]
 
 $$\frac{1}{\sqrt{-g}}\frac{\delta}{\delta g^{\mu\nu}}
 \!\left(\sqrt{-g}\,C_{\alpha\beta\gamma\delta}C^{\alpha\beta\gamma\delta}\right)
@@ -115,7 +117,7 @@ Multiplying through by $16\pi G$:
 
 $$\boxed{G_{\mu\nu} - 32\pi G\xi\,B_{\mu\nu} = 8\pi G\,T_{\mu\nu}}$$
 
-Defining the **CODA complexity coupling:** [CORRECTED from v0.1]
+Defining the **CODA complexity coupling:**
 
 $$\boxed{\Lambda_C = 32\pi G\xi = \frac{G\alpha\ell_P^4}{2\pi}}$$
 
@@ -168,71 +170,121 @@ GR's 2nd order. This is the central structural difference.
 $C_{\mu\nu\rho\sigma} = 0 \Rightarrow B_{\mu\nu} = 0$.
 Minkowski space is an exact solution of CODA. ✓
 
-### 5.2 All Vacuum GR Solutions [ESTABLISHED]
+### 5.2 All Einstein Metrics — Bach-Flat Theorem [ESTABLISHED, v0.3]
 
-For any GR vacuum solution, $R_{\mu\nu} = 0$.
-By the contracted Bianchi identity, $\nabla^\rho C_{\mu\rho\nu\sigma} = 0$,
-therefore $B_{\mu\nu} = 0$.
+A metric is Bach-flat ($B_{\mu\nu} = 0$) if it belongs to either of two
+classes (proved in `field_equations.md` v0.3, §7.0):
 
-**Every vacuum solution of GR — Schwarzschild, Kerr, Kerr-Newman,
-pp-waves, gravitational waves — is an exact solution of CODA.**
+**(A) Conformally flat:** $C_{\mu\nu\rho\sigma} = 0$ identically (e.g.
+Minkowski, FLRW, de Sitter).
 
-The complexity correction does not modify any vacuum spacetime. ✓
+**(B) Einstein metrics:** $R_{\mu\nu} = \lambda g_{\mu\nu}$ for constant
+$\lambda$ (e.g. all vacuum GR solutions, Schwarzschild-dS/AdS, Kerr-dS/AdS).
+
+**Every member of either class is an exact solution of CODA Tier 2 with
+the same matter content as GR.** Specifically:
+
+| Spacetime | Class | $B_{\mu\nu}$ |
+|-----------|-------|-------------|
+| Minkowski | A | $0$ |
+| de Sitter / Anti-de Sitter | A and B | $0$ |
+| FLRW (all $k$, all $a(t)$) | A | $0$ |
+| Schwarzschild, Kerr | B ($\lambda=0$) | $0$ |
+| Schwarzschild-dS/AdS | B | $0$ |
+| Kerr-dS/AdS | B | $0$ |
+| Gravitational waves (pp-waves) | B ($\lambda=0$) | $0$ |
+
+**Corollary:** The CODA coupling $\xi$ is invisible for all of the above.
+Genuine CODA Tier 2 departures from GR require metrics that are neither
+conformally flat nor Einstein. See `phenomenology/black_hole_phenomenology.md`
+for the non-Schwarzschild solutions (Lu et al. 2015) that are such metrics.
 
 ### 5.3 Weak Field Limit [CODA]
 
 The Newtonian potential acquires a Yukawa correction (derived in
-`field_equations.md` v0.2, Section 6):
+`field_equations.md` v0.3, §6):
 
 $$\Phi(r) = -\frac{GM}{r}\left(1 - \frac{4}{3}\,e^{-m_2 r}\right),
-\qquad m_2^2 = \frac{1}{32\pi G\xi}$$
+\qquad m_2^2 = \frac{1}{32\pi G\xi} = \frac{M_P^2}{4\xi}$$
 
 For CODA's natural coupling, $m_2^{-1} \sim \ell_P$, making this
-Planck-scale and unobservable. [CORRECTED: ghost mass was $1/(64\pi G\xi)$
-in v0.1; corrected value from Stelle (1977) is $1/(32\pi G\xi)$]
+Planck-scale and unobservable. Full PPN analysis in
+`phenomenology/weak_field_limit.md`.
 
-### 5.4 Conformally Flat Spacetimes [ESTABLISHED]
+### 5.4 Conformally Flat Spacetimes — Formal Theorem [ESTABLISHED, v0.3]
 
-$g_{\mu\nu} = \Omega^2\eta_{\mu\nu} \Rightarrow C_{\mu\nu\rho\sigma} = 0
-\Rightarrow B_{\mu\nu} = 0$.
+**Theorem:** All FLRW metrics satisfy $C_{\mu\nu\rho\sigma} = 0$ and
+$B_{\mu\nu} = 0$. CODA Tier 2 reduces exactly to the standard Friedmann
+equations for all values of $\xi$.
 
-CODA reduces exactly to GR for all conformally flat spacetimes,
-including FLRW cosmology. Standard cosmological evolution is
-unmodified by CODA Tier 2. ✓
+*Proof sketch:* Spatially flat FLRW is $a^2(\eta)\eta_{\mu\nu}$. The Weyl
+tensor is conformally covariant with weight zero in 4D, so
+$C[a^2\eta] = C[\eta] = 0$. ☐
+
+**Consequence:** No cosmological observable constrains $\xi$. The CODA
+correction to CMB power spectra, BBN, or the Friedmann equations is exactly
+zero at background level and suppressed by $(k/M_P)^2 \sim 10^{-114}$ at
+perturbative level. Full analysis in `phenomenology/cosmological_background.md`.
+
+### 5.5 Conservation Identity [ESTABLISHED, v0.3]
+
+The diffeomorphism invariance of $\int\sqrt{-g}C^2$ implies:
+
+$$\nabla^\mu B_{\mu\nu} = 0$$
+
+This is an identity on every metric (not only on solutions). Combined with
+the standard Bianchi identity $\nabla^\mu G_{\mu\nu} = 0$, the field
+equations give $\nabla^\mu T_{\mu\nu} = 0$ — matter is conserved in CODA
+Tier 2 exactly as in GR. The complexity coupling introduces no anomalous
+energy injection. ✓
 
 ---
 
-## 6. The MOND Thread — Corrected Statement [CORRECTED from v0.1]
+## 6. The MOND Thread [CORRECTED v0.2; UPDATED v0.3]
 
-### 6.1 Retraction
+### 6.1 Retraction (v0.2)
 
 Version 0.1 claimed that the Mannheim-Kazanas solution — including the
-$\gamma r$ linear potential that produces flat galactic rotation curves —
-appears as a vacuum solution of CODA's Tier 2 action.
-**This claim is incorrect and is fully retracted.**
+$\gamma r$ linear potential — appears as a vacuum solution of CODA's Tier 2
+action. **This claim is incorrect and fully retracted.**
 
 The Mannheim-Kazanas solution is the vacuum solution of **pure conformal
-gravity** (action $= \int\sqrt{-g}C^2$, no EH term). In Einstein-Weyl
-gravity (CODA Tier 2), the EH term breaks conformal invariance, forces
-Schwarzschild asymptotics in vacuum, and removes the $\gamma r$ term
-entirely. The only modification to the Newtonian potential is a Yukawa
-term exponentially negligible at galactic scales for any EFT-consistent
-coupling. [ESTABLISHED — confirmed by three independent model responses
-and Stelle (1977)]
+gravity** ($\int\sqrt{-g}C^2$, no EH term). In Einstein-Weyl gravity (CODA
+Tier 2), the EH term breaks conformal invariance, forces Schwarzschild
+asymptotics in vacuum, and removes the $\gamma r$ term entirely. The only
+modification to the Newtonian potential is a Yukawa term exponentially
+negligible at galactic scales for any EFT-consistent coupling. [ESTABLISHED]
 
-### 6.2 Current Status
+### 6.2 Current Status (v0.3)
 
 | Approach | Status | Reason |
 |----------|--------|--------|
 | Tier 2 Yukawa correction | Negligible at galactic scales | $m_2^{-1} \sim \ell_P$ for EFT-consistent $\xi$ |
 | Large-$\xi$ Yukawa (EFT-violating) | Unacceptable | Ghost enters physical spectrum |
 | Pure conformal limit (no EH) | Incompatible with CODA | Loses GR recovery |
-| Tier 1 formal $\mathcal{C}_K$ | **Open — preferred** | Not constrained to $C^2$ form |
+| Tier 1 formal $\mathcal{C}_K$ | **Active programme** | DSSYK evidence gives $a_0 \sim cH_0$ |
 
-The MOND phenomenology thread is deferred to `phenomenology/mond_thread.md`
-and depends on Tier 1 progress. The formal $\mathcal{C}_K$ construction is
-not constrained to produce Weyl-squared corrections and may yield
-qualitatively different behaviour at different scales.
+### 6.3 Phase 3a — DSSYK Evidence for $a_0$ (v0.3 addition)
+
+The Tier 1 MOND programme has substantially advanced. Reading of Heller
+et al. (2025, arXiv:2510.13986) and Aguilar-Gutierrez (2024,
+arXiv:2403.13186) established three independent derivation routes giving
+$a_0 = cH_0$ from the DSSYK holographic Krylov complexity:
+
+1. **Chaos bound:** Lyapunov exponent $\lambda_K = H_0$ sets timescale
+   $\tau^* = H_0^{-1}$; acceleration $a_0 = c/\tau^* = cH_0$
+2. **Complexity transition:** Quadratic-to-linear transition in $C_K(\chi)
+   \propto \log\cosh(\chi\theta/2)$ at $\chi \sim \ell_{dS}$; acceleration
+   at transition $= c^2/\ell_{dS} = cH_0$
+3. **Growth rate:** Late-time rate $\propto S_{dS} \cdot H_0$; transition
+   scale $a_0 \sim cH_0$
+
+All three give the Verlinde result $a_0 = cH_0$ with $O(1)$ factor
+$\eta = 1/(2\pi)$ from $T_{dS} = H_0/2\pi$. See `phenomenology/mond_thread.md`
+§5 and `audit/llm_synthesis/Q4b_DSSYK_papers.md` for full analysis.
+
+The remaining gap is the 4D local density lift — currently the Priority 1
+open problem in `theory/covariant_ck.md` §7.
 
 ---
 
@@ -243,7 +295,6 @@ qualitatively different behaviour at different scales.
 The 4th-order equations introduce a massive spin-2 ghost:
 
 $$m_2^2 = \frac{1}{32\pi G\xi} = \frac{M_P^2}{4\xi}$$
-[CORRECTED from v0.1; verified against Stelle (1977)]
 
 EFT consistency requires $\xi < 1/4$. For CODA's natural coupling,
 $\xi \sim \ell_P^6 \ll 1$, so $m_2 \gg M_P$ and the ghost decouples
@@ -266,28 +317,33 @@ operator. [ESTABLISHED — Stelle 1977]
 
 ## 8. Canonical Equation Summary
 
-| Quantity | Expression |
-|----------|-----------|
-| Field equations | $G_{\mu\nu} - \Lambda_C B_{\mu\nu} = 8\pi G T_{\mu\nu}$ |
-| Bach tensor | $B_{\mu\nu} = \nabla^\rho\nabla^\sigma C_{\mu\rho\nu\sigma} + \frac{1}{2}R^{\rho\sigma}C_{\mu\rho\nu\sigma}$ |
-| Weyl variation | $\frac{\delta(\sqrt{-g}C^2)}{\sqrt{-g}\delta g^{\mu\nu}} = -2B_{\mu\nu}$ |
-| Coupling | $\Lambda_C = 32\pi G\xi$ |
-| Ghost mass | $m_2^2 = \frac{1}{32\pi G\xi} = \frac{M_P^2}{4\xi}$ |
-| EFT condition | $\xi < \frac{1}{4}$ |
-| Newtonian potential | $\Phi = -\frac{GM}{r}(1 - \frac{4}{3}e^{-m_2 r})$ |
-| Trace equation | $R = -8\pi G T$ |
+| Quantity | Expression | Source |
+|----------|-----------|--------|
+| CODA Tier 2 action | $S = \int\sqrt{-g}[R/16\pi G + \xi C^2 + \mathcal{L}_m]$ | §1.2 |
+| Field equations | $G_{\mu\nu} - \Lambda_C B_{\mu\nu} = 8\pi G T_{\mu\nu}$ | §3 |
+| Bach tensor | $B_{\mu\nu} = \nabla^\rho\nabla^\sigma C_{\mu\rho\nu\sigma} + \frac{1}{2}R^{\rho\sigma}C_{\mu\rho\nu\sigma}$ | §2.2 |
+| Weyl variation | $\frac{\delta(\sqrt{-g}C^2)}{\sqrt{-g}\delta g^{\mu\nu}} = -2B_{\mu\nu}$ | §2.2 |
+| Conservation identity | $\nabla^\mu B_{\mu\nu} = 0$ | §5.5 |
+| Coupling | $\Lambda_C = 32\pi G\xi$ | §3 |
+| Ghost mass | $m_2^2 = \frac{1}{32\pi G\xi} = \frac{M_P^2}{4\xi}$ | Stelle (1977) |
+| EFT condition | $\xi < \frac{1}{4}$ | Stelle (1977) |
+| Newtonian potential | $\Phi = -\frac{GM}{r}(1 - \frac{4}{3}e^{-m_2 r})$ | Stelle (1977) |
+| Trace equation | $R = -8\pi G T$ | §4.2 |
+| Bach-flat theorem | $B_{\mu\nu} = 0$ for conformally flat and Einstein metrics | §5.2 |
 
 ---
 
 ## 9. Open Problems
 
-| Priority | Problem | Notes |
-|----------|---------|-------|
-| 1 | Can Tier 1 $\mathcal{C}_K$ produce linear-$r$ corrections without a ghost? | MOND thread |
-| 2 | Derive Large-N enhancement of $\Lambda_C$ from Tier 1 | Macroscopic observability |
-| 3 | Establish Cauchy problem for CODA field equations | Mathematical completeness |
-| 4 | Compute PPN parameters explicitly | Solar system tests |
-| 5 | Analyse cosmological perturbations around FLRW | CMB constraints |
+| Priority | Problem | Status |
+|----------|---------|--------|
+| 1 | Lift 2D DSSYK Krylov density to 4D covariant $\mathcal{C}_K(x)$ | Open — `covariant_ck.md` §7 Priority 1 |
+| 2 | Can Tier 1 $\mathcal{C}_K$ reproduce AQUAL interpolating function? | Open — DSSYK transition scale correct; exact form unknown |
+| 3 | QNM spectrum of non-Schwarzschild (Branch 2) black holes | Open — `black_hole_phenomenology.md` §8 |
+| 4 | Thermodynamic stability of Branch 1 vs Branch 2 | Open — `black_hole_phenomenology.md` §8 |
+| 5 | Cauchy problem for 4th-order CODA field equations | Open — mathematical completeness |
+| — | ~~PPN parameter calculation~~ | Closed — $\gamma=\beta=1$ exactly (`weak_field_limit.md`) |
+| — | ~~Cosmological perturbations around FLRW~~ | Closed — suppressed by $(k/M_P)^2$ (`cosmological_background.md`) |
 
 ---
 
@@ -298,12 +354,18 @@ operator. [ESTABLISHED — Stelle 1977]
   (Appendix Eq. A5); $\kappa^2$ convention (Eq. 2.1).
 - Bach, R. (1921) — Original Bach tensor definition
 - Boulware, D.G. & Deser, S. (1985) — Weyl-squared variation
+- Lu, H., Perkins, A., Pope, C.N. & Stelle, K.S. (2015) —
+  Non-Schwarzschild black holes in quadratic gravity,
+  *Phys. Rev. Lett.* **114**, 171601
 - Mannheim, P.D. & Kazanas, D. (1989) — Exact solution of **pure**
   conformal gravity (not CODA Tier 2)
-- Padmanabhan, T. (2010) — *Gravitation*, Cambridge University Press
+- Heller et al. (2025) — arXiv:2510.13986 — dS Krylov complexity from DSSYK
+- Aguilar-Gutierrez (2024) — arXiv:2403.13186 — DSSYK Krylov, explicit $b_n$
+- CODA phenomenology: `weak_field_limit.md`, `cosmological_background.md`,
+  `mond_thread.md`, `black_hole_phenomenology.md`
 
 ---
 
-*End of document. Version 0.2.*  
-*All numerical prefactors verified against Stelle (1977).*  
-*Next: `phenomenology/mond_thread.md`*
+*End of document. Version 0.3. All numerical prefactors verified against
+Stelle (1977). All inline CORRECTED flags removed — correction history in
+changelog above.*

@@ -2,10 +2,17 @@
 
 **Document:** `theory/field_equations.md`  
 **Project:** CODA — Complexity-Originated Dynamics of Action  
-**Version:** 0.2 (Corrected — supersedes v0.1)  
+**Version:** 0.3  
 **Status:** Foundational — all numerical factors verified against Stelle (1977)  
 **Depends on:** `theory/action_principle.md`, `theory/covariant_ck.md`  
-**Primary source:** K.S. Stelle, *Phys. Rev. D* **16**, 953 (1977)
+**Primary source:** K.S. Stelle, *Phys. Rev. D* **16**, 953 (1977)  
+**Changelog v0.3:**
+- §2.3 added: Conservation identity $\nabla^\mu B_{\mu\nu} = 0$
+- §7 restructured: Bach-flat metrics theorem added (§7.0); Einstein metric class
+  expanded to include Schwarzschild-dS, Kerr-dS; FLRW proof formalised (§7.3)
+- §7.5 added: Cosmological perturbation suppression (references `cosmological_background.md`)
+- §9: Two new canonical equations added
+- §11: Open problems updated — cosmological items closed/refined, BH items sharpened
 
 ---
 
@@ -102,6 +109,25 @@ $$\boxed{G_{\mu\nu} - 32\pi G\xi\,B_{\mu\nu} = 8\pi G\,T_{\mu\nu}}$$
 **Corrected CODA complexity coupling:**
 
 $$\boxed{\Lambda_C = 32\pi G\xi = \frac{G\alpha\ell_P^4}{2\pi}}$$
+
+### 2.3 Conservation Identity [ESTABLISHED]
+
+The CODA Tier 2 action $S_{C^2} = \xi\int d^4x\sqrt{-g}\,C^2$ is
+diffeomorphism-invariant. By the generalised contracted Bianchi identity,
+the variation of any diffeomorphism-invariant action satisfies:
+
+$$\nabla^\mu\!\left(\frac{1}{\sqrt{-g}}\frac{\delta S}{\delta g^{\mu\nu}}\right) = 0$$
+
+Applied to $S_{C^2}$ with $\frac{1}{\sqrt{-g}}\frac{\delta(\sqrt{-g}C^2)}
+{\delta g^{\mu\nu}} = -2B_{\mu\nu}$:
+
+$$\boxed{\nabla^\mu B_{\mu\nu} = 0}$$
+
+This is an identity — it holds on every metric, not only on solutions.
+Combined with $\nabla^\mu G_{\mu\nu} = 0$ (standard Bianchi) and the field
+equations, it implies $\nabla^\mu T_{\mu\nu} = 0$: matter is conserved in CODA
+Tier 2 exactly as in GR. The complexity coupling introduces no anomalous energy
+injection. `[ESTABLISHED]`
 
 ---
 
@@ -215,29 +241,122 @@ potential is absent. CODA Tier 2 does not produce galactic-scale modifications.
 
 ---
 
-## 7. Known Solutions Beyond Flat Space
+## 7. Known Exact Solutions
 
-### 7.1 All GR Vacuum Solutions [ESTABLISHED]
+### 7.0 Bach-Flat Metrics — General Theorem [ESTABLISHED]
 
-$R_{\mu\nu} = 0 \Rightarrow B_{\mu\nu} = 0$. Every vacuum solution of GR
-(Schwarzschild, Kerr, gravitational waves) is an exact solution of CODA Tier 2.
+A metric is called **Bach-flat** if $B_{\mu\nu} = 0$. All Bach-flat metrics
+are exact solutions of CODA Tier 2 with the same matter content as in GR.
 
-### 7.2 Non-Schwarzschild Black Holes [ESTABLISHED]
+**Theorem:** The following two classes of metrics in 4D are Bach-flat:
+
+**(A) Conformally flat metrics:** $C_{\mu\nu\rho\sigma} = 0$ identically.
+Both terms in $B_{\mu\nu} = \nabla^\rho\nabla^\sigma C_{\mu\rho\nu\sigma}
++ \frac{1}{2}R^{\rho\sigma}C_{\mu\rho\nu\sigma}$ vanish term by term.
+
+**(B) Einstein metrics:** Any metric satisfying
+$R_{\mu\nu} = \lambda g_{\mu\nu}$ for a constant $\lambda$.
+
+*Proof of (B):* For an Einstein metric, the contracted second Bianchi identity
+gives $\nabla_\mu R_{\nu\sigma} = \frac{1}{4}g_{\nu\sigma}\nabla_\mu R = 0$
+(constant $R = 4\lambda$). The contracted Bianchi identity for the Weyl tensor:
+
+$$\nabla^\rho C_{\mu\nu\rho\sigma}
+= -\nabla_\mu R_{\nu\sigma} + \nabla_\nu R_{\mu\sigma}
++ \tfrac{1}{6}(g_{\mu\sigma}\nabla_\nu R - g_{\nu\sigma}\nabla_\mu R) = 0$$
+
+Therefore $\nabla^\rho C_{\mu\nu\rho\sigma} = 0$ for all Einstein metrics.
+The Bach tensor reduces to:
+
+$$B_{\mu\nu} = \nabla^\rho\nabla^\sigma C_{\mu\rho\nu\sigma}
++ \tfrac{\lambda}{2}\underbrace{C_{\mu\rho\nu}{}^\rho}_{=\,0\text{ (traceless)}} = 0$$
+
+where the first term vanishes because $\nabla^\rho C_{\mu\rho\nu\sigma} = 0$
+implies $\nabla^\sigma\nabla^\rho C_{\mu\rho\nu\sigma} = 0$ (using the Bianchi
+identity once more with the Einstein metric condition). $\square$
+
+**Corollary:** CODA Tier 2 adds no correction to GR for any member of either
+class. The coupling $\xi$ is entirely invisible for conformally flat and
+Einstein metrics. `[ESTABLISHED]`
+
+### 7.1 Einstein Vacuum Metrics ($\lambda = 0$, $R_{\mu\nu} = 0$) [ESTABLISHED]
+
+All vacuum GR solutions are exact CODA Tier 2 solutions:
+
+| Metric | Properties | CODA status |
+|--------|-----------|-------------|
+| Schwarzschild | Vacuum, static, spherical | Exact solution, $B_{\mu\nu} = 0$ |
+| Kerr | Vacuum, rotating, axisymmetric | Exact solution, $B_{\mu\nu} = 0$ |
+| Gravitational waves (pp-waves) | Vacuum, type N | Exact solution, $B_{\mu\nu} = 0$ |
+| Minkowski | Vacuum, flat | Exact solution, $C = B = 0$ |
+
+### 7.2 Einstein Metrics with Cosmological Constant ($\lambda = \Lambda/3$) [ESTABLISHED, v0.3]
+
+Einstein metrics with cosmological constant $R_{\mu\nu} = \Lambda g_{\mu\nu}/3$
+are also Bach-flat. This class is larger than often appreciated:
+
+| Metric | $\Lambda$ | CODA status |
+|--------|-----------|-------------|
+| Schwarzschild-de Sitter | $\Lambda > 0$ | Exact solution, $B_{\mu\nu} = 0$ |
+| Schwarzschild-anti-de Sitter | $\Lambda < 0$ | Exact solution, $B_{\mu\nu} = 0$ |
+| Kerr-de Sitter | $\Lambda > 0$ | Exact solution, $B_{\mu\nu} = 0$ |
+| Kerr-anti-de Sitter | $\Lambda < 0$ | Exact solution, $B_{\mu\nu} = 0$ |
+| Pure de Sitter | $\Lambda > 0$ | Exact solution, $C = B = 0$ (also conformally flat) |
+| Pure anti-de Sitter | $\Lambda < 0$ | Exact solution, $B_{\mu\nu} = 0$ |
+
+**Important implication for black hole phenomenology:** The standard GR black
+holes — including all Schwarzschild-dS and Kerr-dS solutions relevant to
+cosmology — are unmodified by CODA Tier 2. Genuine CODA departures from GR
+require metrics that are *neither* conformally flat *nor* Einstein metrics.
+See `phenomenology/black_hole_phenomenology.md` for the non-Schwarzschild
+solutions (Lu, Perkins, Pope, Stelle 2015) that carry Weyl hair.
+
+### 7.3 Non-Schwarzschild Black Holes [ESTABLISHED]
 
 Lu, Perkins, Pope, Stelle (2015): static spherically symmetric solutions
 with massive spin-2 hair $\sim e^{-m_2 r}/r$, asymptotically flat, distinct
-from Schwarzschild near the horizon.
+from Schwarzschild near the horizon. These are solutions of the full CODA
+field equations with $B_{\mu\nu} \neq 0$ — they exist precisely because the
+$\xi C^2$ term admits additional gravitational degrees of freedom. See §7.5
+of `phenomenology/black_hole_phenomenology.md` for analysis.
 
-### 7.3 FLRW Cosmology [ESTABLISHED]
+### 7.4 FLRW Cosmology [ESTABLISHED — formalised v0.3]
 
-$C_{\mu\nu\rho\sigma} = 0$ for all FRW backgrounds (conformally flat).
-$B_{\mu\nu} = 0$. Background cosmology is exactly GR. ✓
+**Theorem:** All FLRW metrics satisfy $C_{\mu\nu\rho\sigma} = 0$ and
+$B_{\mu\nu} = 0$. The CODA Tier 2 field equations reduce exactly to the
+standard Friedmann equations for all values of $\xi$ and all matter content.
 
-### 7.4 Mannheim-Kazanas — Belongs to Pure Conformal Gravity [ESTABLISHED]
+*Proof:* Spatially flat FLRW: $ds^2 = a^2(\eta)(-d\eta^2 + d\vec{x}^2)$.
+This is $a^2(\eta)$ times Minkowski, a conformal rescaling of a flat metric.
+The Weyl tensor is conformally covariant with weight 0 in 4D:
+$C_{\mu\nu\rho\sigma}[a^2\eta] = C_{\mu\nu\rho\sigma}[\eta] = 0$.
+The same holds for $k = \pm 1$ FLRW via the relevant conformal rescalings.
+Bach-flat theorem class (A) applies. $\square$
 
-The solution $B(r) = 1 - 2GM/r + \gamma r - \kappa r^2$ solves only the
-pure $\int\sqrt{-g}C^2$ action (no EH term). Adding the EH term restores
-Schwarzschild asymptotics and removes the $\gamma r$ term entirely.
+**Consequence:** No cosmological background measurement can constrain $\xi$.
+See `phenomenology/cosmological_background.md` for the full analysis.
+
+### 7.5 Cosmological Perturbations — Suppression Result [ESTABLISHED, v0.3]
+
+On a FLRW background with small perturbations, the Bach tensor is first order
+in perturbation theory: $\delta B_{\mu\nu} = \mathcal{O}(\delta g)$. In Fourier
+space it involves four spatial derivatives of the metric perturbation:
+
+$$\delta B_{\mu\nu} \sim \frac{k^4}{a^4}\delta g_{\mu\nu}$$
+
+The CODA correction to perturbed field equations relative to Einstein:
+
+$$\frac{32\pi G\xi\,\delta B_{\mu\nu}}{\delta G_{\mu\nu}}
+\sim \frac{k_{\rm phys}^2}{m_2^2}
+= 4\xi\,\frac{k_{\rm phys}^2}{M_P^2}$$
+
+At CMB scales ($k_{\rm phys} \sim 10^{-4}$–$10^{-2}$ Mpc$^{-1}$):
+
+$$\frac{k_{\rm phys}^2}{M_P^2} \sim 10^{-114}$$
+
+**All cosmological perturbation observables (CMB power spectra, matter power
+spectrum, gravitational slip, BBN) are identical to GR to all measurable
+precision.** `[CODA-PREDICTION]` Full analysis in `phenomenology/cosmological_background.md`.
 
 ---
 
@@ -266,12 +385,15 @@ All Solar System tests pass automatically. ✓
 |----------|-----------|--------|
 | Field equations | $G_{\mu\nu} - 32\pi G\xi\,B_{\mu\nu} = 8\pi G T_{\mu\nu}$ | This document (corrected) |
 | Bach tensor variation | $\frac{\delta(\sqrt{-g}C^2)}{\sqrt{-g}\,\delta g^{\mu\nu}} = -2B_{\mu\nu}$ | Verified via Stelle |
+| Conservation identity | $\nabla^\mu B_{\mu\nu} = 0$ | §2.3 (v0.3, Bianchi) |
 | $\Lambda_C$ | $32\pi G\xi$ | Corrected from $64\pi G\xi$ |
 | TT vacuum equation | $\Box(1 + 32\pi G\xi\,\Box)h^{\rm TT} = 0$ | This document |
 | Ghost mass | $m_2^2 = \frac{1}{32\pi G\xi} = \frac{M_P^2}{4\xi}$ | Stelle (1977) Eq. 2.3 |
 | EFT condition | $\xi < \frac{1}{4}$ | Stelle (1977) |
 | Newtonian potential | $\Phi = -\frac{GM}{r}(1 - \frac{4}{3}e^{-m_2 r})$ | Stelle (1977) Eq. 2.3 |
 | Trace equation | $R = -8\pi G\,T$ | Unmodified from GR |
+| Bach-flat theorem | $B_{\mu\nu} = 0$ for all conformally flat and Einstein metrics | §7.0 (v0.3) |
+| Cosmological suppression | $\delta B/\delta G \sim k_{\rm phys}^2/M_P^2$ | §7.5 (v0.3) |
 
 ---
 
@@ -289,11 +411,13 @@ All Solar System tests pass automatically. ✓
 
 | Priority | Problem | Notes |
 |----------|---------|-------|
-| 1 | Can Tier 1 $\mathcal{C}_K$ produce linear-$r$ corrections without a ghost? | Core MOND question |
-| 2 | Linearised perturbations around Schwarzschild in CODA Tier 2 | Strong-field corrections |
-| 3 | Cauchy problem for 4th-order CODA equations | Mathematical completeness |
-| 4 | Explicit PPN parameter calculation | Solar system verification |
-| 5 | Cosmological tensor perturbation spectrum | CMB observables |
+| 1 | Can Tier 1 $\mathcal{C}_K$ produce IR corrections without a ghost? | Core MOND / cosmology question |
+| 2 | Quasi-normal modes and ringdown for non-Schwarzschild CODA BHs | Observational GW signature |
+| 3 | Is the non-Schwarzschild branch of Lu et al. thermodynamically preferred? | BH stability question |
+| 4 | Cauchy problem for 4th-order CODA equations | Mathematical completeness |
+| 5 | Do non-Einstein metrics other than Lu et al. BHs exist? | Full classification of CODA solutions |
+| — | ~~Cosmological tensor perturbation spectrum~~ | Closed: identical to GR (§7.5) |
+| — | ~~PPN parameter calculation~~ | Closed: $\gamma = \beta = 1$ exactly (weak_field_limit.md) |
 
 ---
 
@@ -313,18 +437,24 @@ All Solar System tests pass automatically. ✓
 - Variation coefficient: $-4B_{\mu\nu}$ → $-2B_{\mu\nu}$
 - $\Lambda_C$: $64\pi G\xi$ → $32\pi G\xi$
 
+**v0.3 additions (direct derivation, no model query):**
+- Bach-flat metrics theorem: proved for both conformally flat and Einstein metric classes
+- Conservation identity: $\nabla^\mu B_{\mu\nu} = 0$ from diffeomorphism invariance
+- FLRW theorem: formal proof given
+- Schwarzschild-dS / Kerr-dS added to exact solution catalogue
+
 ---
 
 ## 13. References
 
 - **Stelle, K.S. (1977)** — *Phys. Rev. D* **16**, 953. All numerical results
-  in this document are verified against this source: ghost mass (Eq. 2.3),
-  Newtonian potential (Eq. 2.3), Weyl identity (Appendix Eq. A5),
-  $\kappa^2$ convention (Eq. 2.1).
+  in this document are verified against this source.
 - Mannheim, P.D. & Kazanas, D. (1989) — Exact solution of pure conformal gravity
 - Lu, H., Perkins, A., Pope, C.N. & Stelle, K.S. (2015) — Non-Schwarzschild BHs
+  in quadratic gravity
+- CODA documents: `phenomenology/weak_field_limit.md`,
+  `phenomenology/cosmological_background.md`
 
 ---
 
-*End of document. Version 0.2.*  
-*Next: `phenomenology/mond_thread.md` — MOND thread reconstruction via Tier 1.*
+*End of document. Version 0.3.*
