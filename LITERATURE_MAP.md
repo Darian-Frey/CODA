@@ -2,10 +2,19 @@
 
 **Document:** `LITERATURE_MAP.md`  
 **Project:** CODA — Complexity-Originated Dynamics of Action  
-**Version:** 0.1  
+**Version:** 0.2  
 **Purpose:** Maps the theoretical lineage of CODA, organises the
 literature by role, and records what has been drawn from, adapted,
 ruled out, or targeted from each source.
+
+**Changelog v0.2:**
+- Heller et al. (2025) added as `[FOUNDATION]` in Tier 2
+- Aguilar-Gutierrez (2024) added as `[FOUNDATION]` in Tier 2
+- Lu, Perkins, Pope & Stelle (2015) added as `[FOUNDATION]` in Tier 1
+- Blommaert, Mertens & Papalini (2024) added as `[FOUNDATION]` in Tier 2
+- Maldacena-Shenker-Stanford entry updated with DSSYK/chaos bound route
+- Bisognano-Wichmann section reference corrected to `covariant_ck.md` §7
+- Monitoring table updated — DSSYK/dS Krylov entry substantially advanced
 
 ---
 
@@ -67,6 +76,31 @@ Variation of Weyl-squared action and ghost analysis for
 Einstein-Weyl gravity. Confirms $\frac{\delta(\sqrt{-g}C^2)}
 {\delta g^{\mu\nu}} = -2\sqrt{-g}B_{\mu\nu}$ (in CODA's Bach
 tensor convention).
+
+---
+
+### Lu, H., Perkins, A., Pope, C.N. & Stelle, K.S. (2015) `[FOUNDATION]`
+**"Black Holes in Higher-Derivative Gravity"**  
+*Phys. Rev. Lett.* **114**, 171601.
+
+Establishes the existence of a second branch of static, spherically
+symmetric, asymptotically flat black hole solutions in Einstein-Weyl
+gravity — distinct from Schwarzschild and carrying massive spin-2
+Weyl hair. CODA draws directly on:
+
+- The non-Schwarzschild metric ansatz and far-field Yukawa expansion:
+  $f(r) = 1 - 2GM/r + (\beta/r)e^{-m_2 r} + \ldots$
+- The two-branch structure: Branch 1 (Schwarzschild, Bach-flat) and
+  Branch 2 (Weyl hair, $B_{\mu\nu} \neq 0$)
+- The bifurcation point where the two branches meet at a minimum mass
+
+These solutions are the only regime where CODA Tier 2 genuinely departs
+from GR in the strong-field sector. Full analysis in
+`phenomenology/black_hole_phenomenology.md`.
+
+**Limitation:** The Yukawa hair is confined to sub-Planckian distances
+from the horizon for EFT-consistent $\xi < 1/4$. The non-Schwarzschild
+branch is observationally inaccessible at astrophysical scales.
 
 ---
 
@@ -134,7 +168,7 @@ This is the rigorous mathematical foundation for the claim that
 modular Hamiltonians are the covariant replacement for global time
 evolution in algebraic QFT — a key assumption in CODA's Tier 1
 construction. Extension to general curved spacetimes is an open
-problem noted as Priority 5 in `covariant_ck.md`.
+problem noted as Priority 7 in `covariant_ck.md` §7.
 
 ---
 
@@ -155,10 +189,106 @@ encoded in the quantum information structure of the boundary state.
 *JHEP* **2016**, 106.
 
 The Lyapunov exponent bound $\lambda_L \leq 2\pi T$ in quantum chaotic
-systems. The scrambling time $t_s$ that appears in CODA's proposed
-Large-N enhancement mechanism is set by this bound. This is the
-connection between the Krylov complexity growth rate and the
-thermodynamic properties of black holes.
+systems. CODA draws on this in two distinct roles:
+
+**Role 1 — Scrambling time:** The scrambling time $t_s \sim \beta\log S$
+sets the timescale for information to spread across a black hole, relevant
+to the BH information paradox discussion in `phenomenology/black_hole_phenomenology.md`.
+
+**Role 2 — DSSYK chaos bound route to $a_0$:** The DSSYK holographic dual
+to de Sitter is maximally chaotic at temperature $T_{dS} = H_0/2\pi$,
+saturating this bound with Lyapunov exponent $\lambda_K = 2\pi T_{dS} = H_0$.
+This defines a characteristic timescale $\tau^* = H_0^{-1}$ and hence the
+acceleration scale $a_0 = c/\tau^* = cH_0$ — Route 1 of the three
+independent derivations in `phenomenology/mond_thread.md` §5.2.
+[ESTABLISHED from Aguilar-Gutierrez 2024, §4.1]
+
+---
+
+### Aguilar-Gutierrez, S.E. (2024) `[FOUNDATION]`
+**"Towards Complexity in de Sitter Space from the Double-Scaled
+Sachdev-Ye-Kitaev Model"**  
+*JHEP* **10** (2024), 107. arXiv:2403.13186
+
+The paper that provides CODA's most concrete Krylov complexity results
+in a de Sitter holographic setting. CODA draws directly on:
+
+- **Eq. 4.10** — Explicit Lanczos coefficients for physical operators
+  in the DSSYK/LdS2/SdS3 triality:
+  $b_n = n\sqrt{(n^2 - \nu^2/4)/(4n^2-1)} \to n/2$ for large $n$
+- **Eq. 4.15** — Late-time exponential Krylov complexity
+  $C_K(\tau \gg 1) \propto e^{H_0\tau}$, saturating the MSS chaos bound
+- **Eq. 4.13-4.14** — Closed-form exact result for $\nu = 1/2$:
+  $b_n = n/2$, $C_K(\tau) = \sinh^2(\tau/2)$
+- The identification $\lambda_K = H_0$ (Lyapunov exponent equals
+  the Hubble parameter) — Route 1 of the $a_0 \sim cH_0$ derivation
+
+**Role in CODA:** Provides the established Lanczos growth rate
+$\alpha = H_0/2$ that CODA's Phase 3a programme required. Confirms
+that in the correct (holographic, chaotic) dS setting, Krylov
+complexity saturates the chaos bound with exponent $H_0$. This is
+the missing element that the Q4 free-scalar analysis could not provide.
+
+**Limitation for CODA:** Results are in the DSSYK boundary QM dual to
+2D/3D de Sitter. The lift to a local density in 4D dS is the Priority 1
+open problem in `covariant_ck.md` §7.
+
+---
+
+### Heller, M.P., Ori, F., Papalini, J., Schuhmann, T. & Wang, M.-T. (2025) `[FOUNDATION]`
+**"De Sitter Holographic Complexity from Krylov Complexity in DSSYK"**  
+arXiv:2510.13986. (Submitted October 2025)
+
+The paper establishing the first explicit duality between cosmological
+holographic complexity and microscopic boundary Krylov complexity. CODA
+draws directly on:
+
+- **Eq. 21** — The dS complexity dictionary:
+  $2|\log q|\,C_K(\chi)_{\theta\approx\pi} = -i\,L_{dS}(\chi)$
+- **Eq. 20** — Classical dS Krylov complexity function:
+  $C_K(\chi) \propto \log[\cosh(\chi\theta/2)] - \log\theta$
+  — quadratic-to-linear transition at $\chi \sim \ell_{dS}$
+- **Eq. 23** — Higher-dimensional holographic complexity proposal
+  in $dS_{d+1}$: extremal timelike volumes anchored at $\mathcal{I}^\pm$
+- **Eq. 70** — Late-time growth rate proportional to $S_{dS} \cdot T_{dS}
+  = S_{dS} \cdot H_0/(2\pi)$ in all dimensions
+- **Supplemental §3** — Volume integrand of the timelike extremal slice:
+  the candidate local complexity density (Route 2 of $a_0$ derivation)
+
+**Role in CODA:** Provides the explicit dS Krylov function whose
+quadratic-to-linear transition at $\chi \sim \ell_{dS}$ gives
+$a_{\rm transition} = c^2/\ell_{dS} = cH_0 = a_0$ (Route 2 of the
+three-route derivation in `phenomenology/mond_thread.md` §5.2).
+Also provides the limiting extremal surface as the DSSYK-informed
+candidate for a state-independent $\mathcal{C}_K(x)$ in the bulk
+(see `theory/covariant_ck.md` §4.3).
+
+The authors identify *"microscopic realizations in higher dimensions"*
+as the most pressing open question — precisely CODA's Priority 1 problem.
+
+**Limitation for CODA:** Microscopic derivation from DSSYK only in 2D.
+Higher-dimensional extension (Eq. 23) holds for the integrated complexity;
+the local density construction is the remaining open step.
+
+---
+
+### Blommaert, A., Mertens, T.G. & Papalini, J. (2024) `[FOUNDATION]`
+**"The Dilaton Gravity Hologram of Double-Scaled SYK"**  
+arXiv:2404.03535
+
+Establishes the precise duality between disk-level sine dilaton gravity
+and the DSSYK model — the backbone of the Heller et al. (2025) dS
+complexity construction. CODA draws on this for:
+
+- The holographic dictionary $\hat{H}_{\rm grav} = \hat{T}_{\rm DSSYK}$
+  (gravitational Hamiltonian = DSSYK transfer matrix)
+- The Weyl rescaling that maps the effective AdS2 geometry to the original
+  dS2 geometry (the mechanism underlying the dS complexity derivation)
+- The temperature formula $\beta(\theta)$ and its dS limit $\theta \approx \pi$
+
+**Role in CODA:** Background infrastructure for the DSSYK/dS holographic
+programme. Understanding the sine dilaton / DSSYK dictionary is
+prerequisite for extending DSSYK Krylov results to 4D de Sitter.
 
 ---
 
@@ -376,15 +506,16 @@ CODA discards from CODE-GEO:
 The following active research areas are relevant to CODA and should
 be monitored for new results:
 
-| Area | Relevance | Key workers |
-|------|-----------|-------------|
-| Krylov complexity in de Sitter space | Phase 3a — $a_0$ derivation | Caputa, Dymarsky, Susskind group |
-| Modular flow in curved spacetime | Tier 1 construction | Bisognano-Wichmann extensions |
-| AeST phenomenology tests | MOND thread structural target | Skordis, Złośnik, Famaey |
-| dS/CFT and de Sitter holography | $a_0 \sim cH_0$ mechanism | Strominger, Anninos, Maldacena |
-| Galaxy cluster MOND tests | Known failure regime | McGaugh, Banik, Kroupa |
-| Wide binary MOND tests (Gaia) | Galactic-scale constraint | Pittordis, Sutherland |
+| Area | Relevance | Status | Key workers |
+|------|-----------|--------|-------------|
+| DSSYK / dS holography extensions to 4D | Priority 1 open problem — 4D local density lift | **Active** — Heller et al. (2025) identify this as most pressing open question | Blommaert, Mertens, Papalini (Ghent); Verlinde (Princeton) |
+| Modular Krylov complexity | Tier 1 construction — $\epsilon \to 0$ limit | Active — Caputa group | Caputa, Magan, Patramanis |
+| Modular flow in curved spacetime | Tier 1 foundation — Bisognano-Wichmann extensions | Active | Casini-Huerta-Myers programme |
+| AeST phenomenology tests | MOND thread structural target | Active — new CMB data constraints | Skordis, Złośnik, Famaey |
+| Wide binary MOND tests (Gaia DR3) | Galactic-scale constraint on MOND | Active — contested results | Pittordis, Sutherland; Banik |
+| Galaxy cluster MOND tests | Known failure regime | Ongoing | McGaugh, Banik, Kroupa |
+| dS/CFT — higher-dimensional | $a_0 \sim cH_0$ mechanism extension | Active | Anninos, Strominger |
 
 ---
 
-*End of document. Version 0.1.*
+*End of document. Version 0.2.*
