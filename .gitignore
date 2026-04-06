@@ -1,0 +1,96 @@
+# CODA — Complexity-Originated Dynamics of Action
+# .gitignore
+
+# ─── SPARC data files ─────────────────────────────────────────────────────────
+# Large external datasets from Lelli, McGaugh & Schombert (2016).
+# Download from: http://astroweb.cwru.edu/SPARC/
+#   MassModels_Lelli2016c.mrt  — rotation curves + mass models
+#   SPARC_Lelli2016c.mrt       — galaxy catalog
+simulations/data/*.mrt
+simulations/data/*.dat
+simulations/data/*.fits
+
+# ─── Generated simulation outputs ────────────────────────────────────────────
+# Figures are reproducible by running sparc_simulation.py
+simulations/*.png
+simulations/*.pdf
+simulations/*.svg
+
+# Keep the data directory itself (with a .gitkeep)
+!simulations/data/.gitkeep
+
+# ─── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+.eggs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# ─── LaTeX (for future paper drafts) ─────────────────────────────────────────
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+
+# Keep compiled PDFs if they are paper outputs (opt in with git add -f)
+*.pdf
+
+# ─── Operating system ─────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ─── Editors ──────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+# ─── Temporary / scratch ──────────────────────────────────────────────────────
+scratch/
+tmp/
+*.tmp
+*.bak
+*.orig
