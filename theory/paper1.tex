@@ -1,0 +1,1139 @@
+% ============================================================
+%  Paper 1 — CODA Project
+%  Krylov Complexity, de Sitter Holography, and the MOND
+%  Interpolating Function
+%  Shane Hartley
+%  JCAP submission draft — April 2026
+% ============================================================
+\documentclass[a4paper,11pt]{article}
+
+% ── Packages ────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{physics}          % \grad, \div, \abs, \norm
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{geometry}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage[separate-uncertainty=true]{siunitx}
+
+\geometry{
+  a4paper,
+  top=25mm, bottom=25mm,
+  left=25mm, right=25mm
+}
+
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = blue!70!black,
+  citecolor  = green!50!black,
+  urlcolor   = blue!70!black,
+  pdftitle   = {Krylov Complexity, de Sitter Holography, and the MOND
+                Interpolating Function},
+  pdfauthor  = {Shane Hartley}
+}
+
+% ── Custom commands ──────────────────────────────────────────
+\newcommand{\CK}{\mathcal{C}_K}                     % Krylov density field
+\newcommand{\CKz}{\mathcal{C}_K^{(0)}}              % pure dS value
+\newcommand{\CdS}{\mathcal{C}_{dS}}                  % dS complexity
+\newcommand{\tausk}{\tau_*}                          % limiting surface tau
+\newcommand{\Estar}{E_*}                             % limiting surface E
+\newcommand{\gstar}{g_*}                             % growth rate at LES
+\newcommand{\kap}{\kappa}                            % gradient constant
+\newcommand{\az}{a_0}                                % Milgrom scale
+\newcommand{\aN}{a_N}                                % Newtonian acceleration
+\newcommand{\ab}{a_b}                                % baryonic acceleration
+\newcommand{\elldS}{\ell_{\rm dS}}                   % de Sitter radius
+\newcommand{\TdS}{T_{\rm dS}}                        % de Sitter temperature
+\newcommand{\SdS}{S_{\rm dS}}                        % de Sitter entropy
+\newcommand{\Mpl}{M_P}                               % Planck mass
+\newcommand{\GN}{G_N}                                % Newton's constant
+\newcommand{\dS}[1]{\mathrm{dS}_{#1}}               % de Sitter notation
+\newcommand{\LES}{\mathrm{LES}}                      % limiting extremal surface
+\newcommand{\AQUAL}{\mathrm{AQUAL}}                  % AQUAL action
+\newcommand{\rhobar}{\rho_b}                         % baryonic density
+\newcommand{\aobs}{a_{\rm obs}}                      % observed acceleration
+\newcommand{\boxedeq}[1]{%
+  \begin{empheq}[box=\fbox]{equation}#1\end{empheq}}
+
+% For boxed equations without empheq
+\usepackage{empheq}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+
+% ── Title block ──────────────────────────────────────────────
+\title{\large\bfseries Krylov Complexity, de~Sitter Holography, \\[4pt]
+       and the MOND Interpolating Function}
+
+\author{Shane Hartley \\[4pt]
+  \small\itshape Independent researcher \\
+  \small \texttt{shane.hartley06@gmail.com}}
+
+\date{April 2026 \quad --- \quad Preprint, submitted to JCAP}
+
+% ============================================================
+\begin{document}
+\maketitle
+
+% ── Abstract ────────────────────────────────────────────────
+\begin{abstract}
+We show that the MOND interpolating function $\mu(x)=\tanh(x)$ and the
+Milgrom acceleration scale $\az = cH_0/2\pi$ can be derived from
+holographic Krylov complexity in de~Sitter spacetime, using the DSSYK
+correspondence established by Heller et~al.\ \cite{Heller:2025} and
+Aguilar-Gutierrez \cite{Aguilar:2024}.  The derivation has four steps.
+First, we compute the Krylov complexity density of the DSSYK limiting
+extremal surface in $\dS{4}$, obtaining
+$\CKz = 2/(3\sqrt{3}\,\GN\ell^2)$; this satisfies all covariance
+requirements and is state-independent.  Second, we show that the double
+degeneracy of the limiting surface forces a non-analytic response to
+Newtonian perturbations --- $(\delta\tausk)^2=-3\Phi/4$ --- yielding the
+gradient relation $|\nabla\CK|=\kap\,\aN$.  Third, differentiating the
+DSSYK classical complexity function $C_K(x)=\log\cosh(x)$ yields
+$\mu(x)=\tanh(x)$ with the correct deep-MOND and Newtonian asymptotes.
+Fourth, the coupling $\kap$ cancels identically when the kinetic action
+is written in AQUAL form, producing
+\begin{equation*}
+  \nabla\cdot\!\left[\tanh\!\left(\frac{\aN}{\az}\right)\nabla\Phi\right]
+  = 4\pi G\rhobar
+\end{equation*}
+with $\az = cH_0/2\pi$ from the de~Sitter temperature --- within 10\%
+of the observed Milgrom scale with no free parameters.  We test the
+predicted interpolating function against all 175 SPARC galaxies and find
+fits competitive with the standard simple function, with $\mu=\tanh$
+performing best in the deep-MOND dwarf-galaxy regime.  A precisely
+identified open problem --- deriving the AQUAL form of the kinetic action
+from the DSSYK second variation --- is the remaining step to complete the
+first-principles derivation.
+\end{abstract}
+
+\noindent\textbf{Keywords:} MOND $\cdot$ Krylov complexity $\cdot$
+holography $\cdot$ de~Sitter $\cdot$ DSSYK $\cdot$ galactic dynamics
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+
+\subsection{The MOND problem}
+
+Modified Newtonian Dynamics (MOND) \cite{Milgrom:1983a,Milgrom:1983b} is
+the most successful empirical description of galactic dynamics without
+particle dark matter.  The single relation
+\begin{equation}
+  \aN\,\mu\!\left(\frac{\aN}{\az}\right) = \ab,
+  \qquad \az \simeq 1.2\times10^{-10}\,\si{m.s^{-2}},
+  \label{eq:MOND}
+\end{equation}
+where $\ab$ is the Newtonian acceleration from baryons alone, accounts for
+the flat rotation curves of all 175 galaxies in the SPARC catalogue
+\cite{Lelli:2016}, predicts the baryonic Tully-Fisher relation
+$v_c^4=\az G M_b$ \cite{Verheijen:2001,McGaugh:2005}, and encodes the
+Radial Acceleration Relation (RAR) with scatter of only 0.13\,dex over
+five decades in acceleration \cite{McGaugh:2016}.  Two quantities drive
+this success: the acceleration scale $\az$ and the interpolating function
+$\mu(x)$.
+
+Both remain without a derivation from fundamental physics.  The scale
+$\az\approx cH_0/6$ is numerologically close to $cH_0$, suggesting a
+cosmological origin.  Several frameworks have connected $\az$ to the
+Hubble constant through thermodynamic arguments
+\cite{Milgrom:2023,Zhao:2010,Verlinde:2017}, but these do not determine
+$\mu$.  The function $\mu$ is postulated in every existing relativistic
+completion of MOND \cite{Skordis:2021,Bekenstein:2004,Deffayet:2011} ---
+it is fit to data or adopted on phenomenological grounds.  The question of
+\emph{why} $\mu$ takes a specific form, and \emph{why} the transition from
+Newtonian to MOND dynamics occurs precisely at $\aN\sim cH_0$, has no
+answer in the current literature.
+
+\subsection{Holographic Krylov complexity as the new ingredient}
+
+Krylov complexity \cite{Parker:2019,Avdoshkin:2022} is an operator-theoretic
+measure of quantum information spreading.  For an operator $O(t)$ evolving
+under Hamiltonian $H$, the Krylov complexity $K(t)$ quantifies how far
+$O(t)$ has spread in the Krylov basis generated by repeated commutators
+with $H$.  For maximally chaotic systems it grows as $K(t)\propto
+e^{\lambda_K t}$, saturating the MSS chaos bound with Lyapunov exponent
+$\lambda_K = 2\pi T$.
+
+Recent work by Heller et~al.\ \cite{Heller:2025} and Aguilar-Gutierrez
+\cite{Aguilar:2024} establishes the first microscopic computation of
+Krylov complexity in a cosmological spacetime.  In the
+DSSYK/LdS$_2$/SdS$_3$ holographic triality, the Krylov complexity of the
+Hartle-Hawking state equals the volume of a timelike extremal slice in de
+Sitter, and the classical complexity function is
+\begin{equation}
+  C_K(x) = \log\cosh(x).
+  \label{eq:CK}
+\end{equation}
+This function has a natural derivative: $dC_K/dx = \tanh(x)$.  The
+central observation of this paper is that this derivative \emph{is} the
+MOND interpolating function.  The identification follows from a bulk
+calculation showing that the gradient of the holographic complexity
+density equals $\kap\aN$ for a constant $\kap$ that cancels in the MOND
+action.
+
+\subsection{Scope of this work}
+\label{sec:scope}
+
+We derive $\mu(x)=\tanh(x)$ and $\az=cH_0/2\pi$ from the DSSYK
+holographic construction, given that the kinetic action coupling $\CK$ to
+gravity is of AQUAL form.  The AQUAL form is motivated by a partial
+computation of the DSSYK second variation (\cref{sec:second_var}), which
+shows the correct non-analytic power structure, but is not yet fully
+derived from the holographic bulk.  This open step --- the holographic
+dictionary problem --- is precisely identified in \cref{sec:open}.
+
+This is the first derivation of a specific MOND interpolating function
+from an underlying quantum-gravitational framework.  The function
+$\mu=\tanh$ was previously known to work phenomenologically
+\cite{Zhao:2006}, but had no theoretical motivation.  The approach is
+complementary to entropy-based derivations of $\az$
+\cite{Milgrom:2023,Zhao:2010,Verlinde:2017} in that it produces both $\az$
+and $\mu$ simultaneously from the same DSSYK complexity function.
+
+\subsection{Organisation}
+
+\Cref{sec:DSSYK} reviews the DSSYK holographic complexity programme.
+\Cref{sec:density} computes the explicit Krylov density in $\dS{4}$.
+\Cref{sec:perturbed} derives the gradient relation.
+\Cref{sec:MOND} presents the MOND equation.
+\Cref{sec:SPARC} compares predictions against SPARC.
+\Cref{sec:discussion} discusses connections to existing frameworks.
+\Cref{sec:conclusions} concludes.
+
+\medskip
+\noindent\textbf{Conventions.}  Signature $(-,+,+,+)$; $c$ restored where
+relevant; $\GN$ Newton's constant; $\ell=c/H_0$ de~Sitter radius;
+$\Mpl^2=(8\pi\GN)^{-1}$.
+
+% ============================================================
+\section{DSSYK Holographic Krylov Complexity in de~Sitter}
+\label{sec:DSSYK}
+
+\subsection{The DSSYK model and its de~Sitter limit}
+
+The Double-Scaled Sachdev-Ye-Kitaev (DSSYK) model is a disordered
+quantum-mechanical system --- a large-$N$ limit of the SYK model with
+$p\sim\sqrt{N}$ fermion interactions --- which flows in a particular limit
+to two-dimensional de~Sitter gravity (sine-dilaton gravity)
+\cite{Aguilar:2024,Blommaert:2024,Susskind:2022}.  The relevant parameter
+is the chord length $\theta\in(0,\pi)$, with the de~Sitter limit
+$\theta\to\pi$.
+
+In this limit, the DSSYK model is dual to quantum gravity in a static patch
+of $\mathrm{dS}_2$ (LdS$_2$), which is related to a static patch of
+$\mathrm{dS}_3$ (SdS$_3$) by dimensional oxidation.  The Hartle-Hawking
+no-boundary state corresponds to a specific state in the DSSYK chord
+Hilbert space.  Heller et~al.\ \cite{Heller:2025} prove that the Krylov
+spread complexity of this state equals the volume of a timelike extremal
+codimension-1 slice in the bulk $\mathrm{dS}_2$:
+\begin{equation}
+  2|\log q|\,C_K(\chi)_{\theta\approx\pi} = -i\,L_{\rm dS}(\chi),
+  \label{eq:C=V}
+\end{equation}
+where $q$ is the DSSYK deformation parameter and $L_{\rm dS}(\chi)$ is
+the (imaginary) volume of the extremal slice anchored at boundary time
+$\chi/2$.  This is the de~Sitter analogue of the AdS Complexity=Volume
+conjecture \cite{Brown:2016}.
+
+\subsection{The classical complexity function}
+
+The classical saddle-point result \cite[Eq.~20]{Heller:2025} is
+\begin{equation}
+  C_K(\chi) \propto \log\!\left[\cosh\!\left(\frac{\chi\theta}{2}\right)\right],
+  \label{eq:CK_classical}
+\end{equation}
+exhibiting a characteristic quadratic-to-linear transition:
+\begin{itemize}
+  \item \textbf{Precursor regime} ($\chi\ll\elldS$):
+    $C_K\approx(\chi\theta/2)^2/2$ --- quadratic growth.
+  \item \textbf{Scrambling regime} ($\chi\gg\elldS$):
+    $C_K\approx\chi\theta/2 - \log 2$ --- linear growth.
+\end{itemize}
+The transition occurs at $\chi_*\sim\elldS=c/H_0$.
+The late-time growth rate \cite[Eq.~70]{Heller:2025} is
+\begin{equation}
+  \frac{dC_K}{d\chi}\bigg|_{\rm late}
+  \propto \SdS\cdot\TdS
+  = \frac{\pi\ell^2}{\GN}\cdot\frac{H_0}{2\pi},
+  \label{eq:growth_rate}
+\end{equation}
+where $\SdS=\pi\ell^2/\GN$ is the Gibbons-Hawking entropy and
+$\TdS=H_0/2\pi$ is the de~Sitter temperature.
+
+The key property of $C_K(x)=\log\cosh(x)$ relevant to MOND is
+\begin{equation}
+  \frac{dC_K}{dx} = \tanh(x).
+  \label{eq:mu_from_CK}
+\end{equation}
+In \cref{sec:MOND} we show this becomes the MOND interpolating function
+at $x=\aN/\az$.
+
+\subsection{The bulk extremal surface}
+
+Heller et~al.\ propose the holographic complexity in $\mathrm{dS}_{d+1}$
+\cite[Eq.~23]{Heller:2025}:
+\begin{equation}
+  \CdS \equiv \frac{-i\,V}{\GN\,\ell},
+  \label{eq:CdS_def}
+\end{equation}
+where $V$ is the volume of the timelike extremal codimension-1 slice.
+In coordinates $(\tau,w,\Omega_{d-1})$ with metric
+\begin{equation}
+  ds^2 = \frac{\ell^2}{\tau^2}\!\left[
+    -\frac{d\tau^2}{1-\tau^2} + (1-\tau^2)\,dw^2 + d\Omega_{d-1}^2
+  \right],
+  \label{eq:dS_metric}
+\end{equation}
+the extremal slice volume is
+\begin{equation}
+  V(w_0) = \ell^d\,\Omega_{d-1}\int d\tau\;
+  \frac{i}{\tau^d}\sqrt{\frac{1}{1-\tau^2}-(1-\tau^2)\dot{w}^2(\tau)},
+  \label{eq:V_integral}
+\end{equation}
+with $\dot{w}=dw/d\tau$.  As $w_0\to\infty$, embeddings accumulate at the
+\textbf{limiting extremal surface} (LES), whose turning point $\tausk$
+depends only on the de~Sitter geometry --- not on the quantum state.  The
+LES is the late-time attractor of the complexity slices; its position is
+determined by stationarity of the volume growth rate $dV/dw_0$
+(\cref{sec:density}).
+
+\subsection{Three routes to the MOND scale}
+\label{sec:three_routes}
+
+The DSSYK programme identifies $\az\sim cH_0$ through three independent
+routes:
+
+\begin{enumerate}
+  \item \textbf{Chaos bound \cite{Aguilar:2024}:}
+    The Lyapunov exponent saturates the MSS bound, $\lambda_K=H_0$, giving
+    $\tau_*=H_0^{-1}$ and $\az=c/\tau_*=cH_0$.
+
+  \item \textbf{Complexity transition \cite{Heller:2025}:}
+    The quadratic-to-linear transition in $C_K$ at
+    $\chi_*\sim\elldS$ gives $\az=c^2/\elldS=cH_0$.
+
+  \item \textbf{De~Sitter temperature \cite{Heller:2025}:}
+    The growth rate $\propto\SdS\cdot\TdS$ identifies $\az = c\TdS =
+    cH_0/2\pi$.
+\end{enumerate}
+
+Routes~1--2 give $cH_0$; Route~3 gives $cH_0/2\pi$ from the thermal
+normalisation.  Route~3 is observationally preferred:
+$cH_0/2\pi\approx1.082\times10^{-10}\,\si{m.s^{-2}}$ versus observed
+$\az^{\rm obs}\approx1.2\times10^{-10}\,\si{m.s^{-2}}$ (10\% agreement,
+no free parameters).  For $H_0=75\,\si{km.s^{-1}.Mpc^{-1}}$ (SH0ES
+\cite{Riess:2022}) this tightens to 3\%.
+
+% ============================================================
+\section{The Krylov Complexity Density in $\dS{4}$}
+\label{sec:density}
+
+\subsection{Setup}
+
+We work in $d=3$ ($\dS{4}$).  The extremal slice energy $E$ and turning
+point $\tausk$ satisfy
+\begin{equation}
+  E^2 = \frac{\tausk^2-1}{\tausk^{2d}}, \qquad
+  f(\tausk,E) \equiv 1-\tausk^2+E^2\tausk^{2d} = 0,
+  \label{eq:constraint}
+\end{equation}
+and the volume growth rate is
+\begin{equation}
+  g(\tausk) \equiv \tausk^{-d}\sqrt{\tausk^2-1}.
+  \label{eq:growth}
+\end{equation}
+The late-time volume satisfies $dV/dw_0\propto g(\tausk)$.
+
+\subsection{The limiting surface}
+
+As $w_0\to\infty$, $\tausk$ accumulates to the stationary point
+$g'(\tausk)=0$.  For $d=3$:
+\begin{equation}
+  g'(\tausk)
+  = \frac{\tausk^{-4}(3-2\tausk^2)}{\sqrt{\tausk^2-1}}\bigg|_*
+  = 0 \implies \tausk^2 = \frac{3}{2},
+\end{equation}
+\begin{empheq}[box=\fbox]{equation}
+  \tausk^{(d=3)} = \sqrt{\tfrac{3}{2}} \approx 1.2247.
+  \label{eq:tau_star}
+\end{empheq}
+The corresponding energy and growth-rate coefficient are
+\begin{equation}
+  \Estar = g(\tausk) = \frac{2}{3\sqrt{3}},
+  \qquad
+  \frac{dV}{dw_0}\bigg|_* = \frac{8\pi i\ell^3}{3\sqrt{3}},
+  \qquad
+  c_{d=3} = \frac{16\pi}{3\sqrt{3}} \approx 9.68,
+  \label{eq:E_star}
+\end{equation}
+in agreement with \cite[Fig.~3]{Heller:2025} for $d=3$.
+
+\subsection{Double degeneracy of the limiting surface}
+\label{sec:double_deg}
+
+A structural feature critical for \cref{sec:perturbed}: both partial
+derivatives of the constraint function vanish simultaneously at
+$(\tausk,\Estar)$:
+\begin{equation}
+  \frac{\partial f}{\partial\tau}\bigg|_* = 0
+  \quad\text{(turning-point definition)}, \qquad
+  g'(\tausk) = 0
+  \quad\text{(LES definition)}.
+  \label{eq:double_deg}
+\end{equation}
+These are generically independent conditions; their simultaneous vanishing
+makes $(\tausk,\Estar)$ a \emph{degenerate critical point} of the extremal
+surface family.  The consequence is that metric perturbations shift
+$\tausk$ by $|\Phi|^{1/2}$, not $|\Phi|$ --- first-order perturbation
+theory breaks down, forcing a non-analytic response.  This geometric
+non-analyticity is the origin of MOND non-linearity
+(\cref{sec:perturbed}).
+
+\subsection{The Krylov complexity density}
+\label{sec:CK_density}
+
+Normalising the late-time growth rate to a 4D proper volume from the Heller
+et~al.\ construction in $d=3$:
+\begin{empheq}[box=\fbox]{equation}
+  \CKz = \frac{2}{3\sqrt{3}\,\GN\ell^2}
+  \approx 0.385\,\Mpl^2 H_0^2.
+  \label{eq:CK0}
+\end{empheq}
+This satisfies the four requirements for inclusion in a covariant action:
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lll}
+  \toprule
+  Requirement & Status & Comment \\
+  \midrule
+  Scalar under diffeomorphisms & $\checkmark$ &
+    Metric-determined geometric volume \\
+  Dimensions $[L^{-4}]$ & $\checkmark$ &
+    $[\GN\ell^2]^{-1}\sim\Mpl^2 H_0^2$ \\
+  Finite & $\checkmark$ &
+    Growth rate $\Estar$ finite at LES \\
+  State-independent & $\checkmark$ &
+    $\tausk=\sqrt{3/2}$ determined by metric alone \\
+  \bottomrule
+\end{tabular}
+\caption{Properties of the dS$_4$ Krylov complexity density $\CKz$.}
+\label{tab:checks}
+\end{table}
+
+In pure de~Sitter, $\CK$ is spatially constant (correct by maximal
+symmetry).  Spatial variation arises only from perturbations of the dS
+background, computed next.
+
+% ============================================================
+\section{Perturbed de~Sitter --- the Gradient Relation}
+\label{sec:perturbed}
+
+\subsection{Setup}
+
+Consider a conformal perturbation in Newtonian gauge:
+\begin{equation}
+  g_{\mu\nu} \to (1+2\Phi)\,g_{\mu\nu}^{(0)}, \qquad |\Phi|\ll 1,
+  \label{eq:Newtonian_gauge}
+\end{equation}
+where $\Phi(x)$ is the Newtonian gravitational potential.  This shifts the
+LES turning point $\tausk\to\tausk+\delta\tau(x)$.
+
+\subsection{Non-analytic response from the double degeneracy}
+
+The perturbed constraint $f_{\rm pert}(\tausk+\delta\tau, \Estar+\delta
+E, \Phi)=0$, expanded around pure dS.  Using $\partial
+f/\partial\tau|_*=0$ (double degeneracy), the leading term is quadratic
+in $\delta\tau$:
+\begin{equation}
+  \frac{1}{2}f_{\tau\tau}\big|_*\,(\delta\tau)^2 + K\,\Phi
+  = 0 + O(\delta\tau^3,\Phi^2),
+\end{equation}
+where $f_{\tau\tau}|_*=8$ and $K=3$ (computed at $\tausk=\sqrt{3/2}$,
+$\Estar=2/(3\sqrt{3})$, using $\Estar^2\tausk^6=1/2$).  Solving:
+\begin{empheq}[box=\fbox]{equation}
+  (\delta\tau)^2 = -\frac{3\Phi}{4}.
+  \label{eq:delta_tau}
+\end{empheq}
+For attractive gravity ($\Phi<0$), $\delta\tau\in\mathbb{R}$.  The
+turning point shifts as $\delta\tau\propto|\Phi|^{1/2}$ --- the
+double-degeneracy non-analyticity.
+
+\subsection{Complexity density response}
+
+Since $g'(\tausk)=0$, the leading change in growth rate is
+\begin{equation}
+  \delta g = \frac{1}{2}g''(\tausk)(\delta\tau)^2 + O(|\Phi|^{3/2}),
+\end{equation}
+with $g''(\tausk)=-16\sqrt{3}/9$ and $\gstar=\Estar=2/(3\sqrt{3})$:
+\begin{equation}
+  \frac{\delta g}{\gstar}
+  = \frac{\tfrac{1}{2}\cdot(-\tfrac{16\sqrt{3}}{9})\cdot(-\tfrac{3\Phi}{4})}
+         {\tfrac{2\sqrt{3}}{9}}
+  = 3\Phi.
+\end{equation}
+\begin{empheq}[box=\fbox]{equation}
+  \frac{\delta\CK(x)}{\CKz} = 3\,\Phi(x).
+  \label{eq:dCK}
+\end{empheq}
+The complexity density tracks the Newtonian potential with coefficient 3
+--- a pure number from the $\dS{4}$ LES geometry.
+
+\subsection{The gradient relation}
+
+Taking the spatial gradient of \cref{eq:dCK}:
+\begin{equation}
+  \nabla\CK(x) = 3\CKz\,\nabla\Phi(x) \equiv \kap\,\nabla\Phi(x),
+  \label{eq:grad_CK}
+\end{equation}
+where
+\begin{equation}
+  \kap \equiv 3\CKz = \frac{2}{\sqrt{3}\,\GN\ell^2}.
+\end{equation}
+Since $\aN\equiv|\nabla\Phi|$:
+\begin{empheq}[box=\fbox]{equation}
+  |\nabla\CK(x)| = \kap\,\aN(x).
+  \label{eq:grad_relation}
+\end{empheq}
+\textbf{The gradient of the Krylov complexity density equals $\kap$ times
+the local Newtonian acceleration}, with $\kap$ fixed by the $\dS{4}$
+geometry.  As shown in \cref{sec:kappa_cancel}, $\kap$ cancels identically
+in the MOND action.
+
+% ============================================================
+\section{The CODA MOND Equation}
+\label{sec:MOND}
+
+\subsection{Motivation for the AQUAL kinetic action}
+\label{sec:AQUAL_motivation}
+
+We couple $\CK$ to gravity through a kinetic action.  Two requirements
+fix the form: (i) the MOND equation must be second order in $\Phi$,
+ruling out linear couplings $\propto\CK$; (ii) the action must reduce
+to the Poisson equation for $\aN\gg\az$.  These are satisfied by an
+action of AQUAL form \cite{Bekenstein:1984}:
+\begin{equation}
+  S_{\rm kin} = -\frac{\az^2}{8\pi G}\int d^4x\sqrt{-g}\;
+  F\!\left(\frac{|\nabla\CK|^2}{\kap^2\,\az^2}\right),
+  \label{eq:Skin}
+\end{equation}
+with $F(s)\to s$ for $s\gg1$.  Additional motivation comes from the
+second variation $\delta^2\CdS/\delta g^2$, which produces a non-analytic
+$|\Phi|^{3/2}$ term with the correct power for deep-MOND AQUAL
+$F(s)\sim s^{3/2}$ (\cref{sec:second_var}).  We adopt the AQUAL form as
+a working hypothesis; deriving it from the DSSYK bulk is the primary open
+problem (\cref{sec:open}).
+
+The full CODA action is
+\begin{equation}
+  S_{\rm CODA} = \int d^4x\sqrt{-g}\!\left[
+    \frac{R}{16\pi G}
+    + \xi\,C_{\alpha\beta\gamma\delta}C^{\alpha\beta\gamma\delta}
+    - \frac{\az^2}{8\pi G}\,F\!\left(\frac{|\nabla\CK|^2}{\kap^2\az^2}\right)
+  \right] + S_m,
+  \label{eq:Stotal}
+\end{equation}
+where the Weyl-squared term (with ghost mass $m_2^2=1/(32\pi G\xi)$
+\cite{Stelle:1977}) is Bach-flat in all Einstein geometries and does not
+affect galactic dynamics.
+
+\subsection{The $\kappa$ cancellation}
+\label{sec:kappa_cancel}
+
+Substituting $|\nabla\CK|^2=\kap^2\aN^2$ from \cref{eq:grad_relation}:
+\begin{equation}
+  \frac{|\nabla\CK|^2}{\kap^2\,\az^2}
+  = \frac{\kap^2\aN^2}{\kap^2\az^2}
+  = \frac{\aN^2}{\az^2}.
+  \label{eq:kappa_cancel}
+\end{equation}
+The coupling $\kap$ cancels identically, and $S_{\rm kin}$ reduces to
+\begin{equation}
+  S_{\rm kin} = -\frac{\az^2}{8\pi G}\int d^4x\sqrt{-g}\;
+  F\!\left(\frac{\aN^2}{\az^2}\right),
+  \label{eq:Skin_reduced}
+\end{equation}
+exactly the AQUAL action of \citeauthor{Bekenstein:1984}
+\cite{Bekenstein:1984}.  The cancellation is robust: any
+$|\nabla\CK|=\kap'\aN$ produces the same result.  The MOND equation is
+therefore independent of the holographic normalisation.
+
+\subsection{The MOND interpolating function from DSSYK}
+\label{sec:mu_from_DSSYK}
+
+The AQUAL function $F$ determines $\mu$ via $F'(s)=\mu(\sqrt{s})$.
+Identifying $F$ with the DSSYK complexity:
+\begin{equation}
+  \mu(x) = \frac{dC_K}{dx}\bigg|_{C_K=\log\cosh} = \tanh(x),
+  \label{eq:mu_tanh}
+\end{equation}
+evaluated at $x=\aN/\az$.  The corresponding AQUAL function is
+\begin{equation}
+  F(s) = 2\sqrt{s}\,\log\cosh(\sqrt{s})
+       - 2\int_0^{\sqrt{s}}\log\cosh(u)\,du,
+  \label{eq:F}
+\end{equation}
+which is an integral transform of $C_K$: $F(s)=2\sqrt{s}\,C_K(\sqrt{s})
+-2\int_0^{\sqrt{s}}C_K(u)\,du$.  The limits are:
+\begin{align}
+  s\ll 1: &\quad F(s)\to\tfrac{2}{3}s^{3/2} \implies \mu(x)\to x
+    \quad\text{(deep MOND)}\ \checkmark \label{eq:deep_MOND}\\
+  s\gg 1: &\quad F(s)\to s \implies \mu(x)\to 1
+    \quad\text{(Newtonian)}\ \checkmark \label{eq:Newton}
+\end{align}
+Both limits are verified analytically and numerically.
+See \cref{fig:mu} for a comparison with existing interpolating functions.
+
+\subsection{The MOND theorem and corollaries}
+\label{sec:theorem}
+
+\begin{theorem}[CODA MOND Theorem]
+  Given the CODA kinetic action \eqref{eq:Skin} with $F'(s)=\tanh(\sqrt{s})$
+  and the gradient relation \eqref{eq:grad_relation}, the quasi-static
+  weak-field field equation is
+  \begin{empheq}[box=\fbox]{equation}
+    \nabla\cdot\!\left[\tanh\!\left(\frac{\aN}{\az}\right)\nabla\Phi\right]
+    = 4\pi G\,\rhobar,
+    \label{eq:MOND_eq}
+  \end{empheq}
+  with $\az = c\TdS = cH_0/2\pi$.
+\end{theorem}
+
+\noindent The proof has four steps: (i) $\delta\CK=3\Phi\CKz$ from
+\eqref{eq:dCK}; (ii) $|\nabla\CK|=\kap\aN$ from \eqref{eq:grad_relation};
+(iii) $\kap$ cancels identically \eqref{eq:kappa_cancel}; (iv)
+$F'(s)=\tanh(\sqrt{s})$ from \eqref{eq:F}.
+
+\begin{corollary}[Baryonic Tully-Fisher Relation]
+  In the deep-MOND limit $\aN\ll\az$, $\tanh(\aN/\az)\approx\aN/\az$
+  and the asymptotic circular velocity satisfies
+  \begin{equation}
+    v_c^4 = \az\,G\,M_b.
+    \label{eq:BTFR}
+  \end{equation}
+  Using $\az=cH_0/2\pi$: $v_c=109\,\si{km/s}$ for $M_b=10^{10}M_\odot$
+  and $v_c=195\,\si{km/s}$ for $M_b=10^{11}M_\odot$, consistent with the
+  observed BTFR zero-point \cite{Verheijen:2001,McGaugh:2005}.
+\end{corollary}
+
+\begin{corollary}[Radial Acceleration Relation]
+  The equation $\aN\tanh(\aN/\az)=\ab$ gives a unique $\aN$ for each
+  $\ab$, with $\aN\to\ab$ for $\ab\gg\az$ and $\aN\to\sqrt{\ab\az}$ for
+  $\ab\ll\az$ --- a parameter-free prediction of the observed RAR
+  \cite{McGaugh:2016}.  See \cref{fig:RAR}.
+\end{corollary}
+
+\subsection{What is proved and what remains open}
+\label{sec:open}
+
+\paragraph{What is proved.}
+Given the AQUAL kinetic action (premise~iii), the MOND equation
+\eqref{eq:MOND_eq} follows exactly with $\az=cH_0/2\pi$.
+
+\paragraph{What remains open.}
+Premise~(iii) --- the AQUAL form of the kinetic action --- is supported by
+the second variation (\cref{sec:second_var}) but not yet derived from the
+DSSYK bulk.  The required calculation is to show:
+\begin{equation}
+  \frac{\delta^2\CdS}{\delta\Phi(x)\,\delta\Phi(y)}
+  \xrightarrow[\text{dict.}]{\text{holo.}}
+  -\frac{\az^2}{8\pi G}\,F''\!\left(\frac{\aN^2}{\az^2}\right)
+  \cdot\frac{\partial\aN^2}{\partial\Phi(x)}\,\frac{\partial\aN^2}{\partial\Phi(y)},
+  \label{eq:open}
+\end{equation}
+i.e.\ that the DSSYK boundary time responds to $|\nabla\Phi|$ (gradient)
+rather than $|\Phi|$ (value).  The holographic dictionary problem is
+analysed in detail in companion work \cite{CODA:dict}.
+
+\subsection{Evidence from the second variation}
+\label{sec:second_var}
+
+To support premise~(iii), we partially compute
+$\delta^2\CdS/\delta g^2$.
+
+\paragraph{Jacobi spectrum.}
+The Jacobi operator governing shape deformations of the LES has
+eigenvalues
+\begin{equation}
+  \lambda(k,\ell) = 3k^2 - \tfrac{3}{2}\ell(\ell+1) + \tfrac{7}{3}
+  \label{eq:Jacobi}
+\end{equation}
+for mode $(k,\ell)$.  The ground state $\lambda_0=7/3\neq0$: there is no
+Jacobi near-zero mode, and MOND does not arise from a shape instability
+of the LES.
+
+\paragraph{Non-analytic MOND term.}
+The MOND signal arises from the triple derivative
+$g'''(\tausk)=208\sqrt{2}/9$ acting through the double degeneracy.
+The third-order expansion of the growth rate gives
+\begin{equation}
+  g = \Estar\!\left[1 + 3\Phi
+    + \frac{13\sqrt{2}}{2}\,|\Phi|^{3/2} + O(\Phi^2)\right].
+  \label{eq:g_expand}
+\end{equation}
+The non-analytic $|\Phi|^{3/2}$ term matches the deep-MOND AQUAL limit
+$F(s)\sim s^{3/2}$ when $|\Phi|\sim(\aN/\az)^2$, which holds at the
+MOND radius $r_M=\sqrt{GM_b/\az}$.
+
+% ============================================================
+\section{Comparison with SPARC Rotation Curves}
+\label{sec:SPARC}
+
+\subsection{The prediction}
+
+With $\mu=\tanh$ and $\az=cH_0/2\pi$, we solve $\aN\tanh(\aN/\az)=\ab(r)$
+at each radius, with
+\begin{equation}
+  \ab(r) = \frac{V_{\rm gas}|V_{\rm gas}|+\Upsilon_d V_{\rm disk}^2
+              +\Upsilon_b V_{\rm bul}^2}{r},
+  \label{eq:ab}
+\end{equation}
+from the SPARC mass models \cite{Lelli:2016}, with canonical stellar
+mass-to-light ratios $\Upsilon_d=0.5\,M_\odot/L_\odot$ and
+$\Upsilon_b=0.7\,M_\odot/L_\odot$ \cite{Schombert:2020}.  The
+sign-preserving convention $V|V|/r$ handles the 361 negative
+$V_{\rm gas}$ entries.  No parameters are fitted; the circular velocity
+follows from $v_c=\sqrt{\aN r}$.
+
+\subsection{Results across 175 galaxies}
+
+We evaluate three models on all 175 SPARC galaxies (3391 data points):
+CODA ($\mu=\tanh$, $\az=cH_0/2\pi$), tanh ($\mu=\tanh$, $\az=\az^{\rm obs}$),
+and simple ($\mu=x/\sqrt{1+x^2}$ \cite{Zhao:2006}, $\az=\az^{\rm obs}$).
+Results are shown in \cref{tab:sparc}.
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lcccc}
+  \toprule
+  Model & Mean $\chi^2_r$ & Median $\chi^2_r$ & RMS (km/s) & $\chi^2_r<5$ \\
+  \midrule
+  CODA ($\az=cH_0/2\pi$) & 40.6 & 11.2 & 18.5 & 58/175 \\
+  tanh ($\az=\az^{\rm obs}$) & 36.9 & 10.6 & 18.0 & 56/175 \\
+  simple ($\az=\az^{\rm obs}$) & 34.2 & 9.8 & 17.5 & 59/175 \\
+  \bottomrule
+\end{tabular}
+\caption{Goodness-of-fit statistics for 175 SPARC galaxies with fixed
+  canonical mass-to-light ratios $\Upsilon_d=0.5$, $\Upsilon_b=0.7$.
+  Elevated $\chi^2_r$ values relative to fitted-M/L MOND analyses
+  \cite{Famaey:2012} reflect the intentional absence of per-galaxy
+  stellar mass optimisation; the relevant comparison is between columns.}
+\label{tab:sparc}
+\end{table}
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccc}
+  \toprule
+  Hubble type & $n$ & CODA & tanh obs / simple obs \\
+  \midrule
+  Early ($T\leq3$) & 28 & 49.0 & 45.5 / 34.3 \\
+  Late ($T=4$--$7$) & 66 & 11.8 & 10.1 / 9.0 \\
+  Dwarf ($T\geq8$) & 81 & \textbf{7.69} & 7.69 / \textbf{7.88} \\
+  \bottomrule
+\end{tabular}
+\caption{Median $\chi^2_r$ stratified by Hubble type.  In the deep-MOND
+  dwarf regime ($T\geq8$), $\mu=\tanh$ narrowly outperforms the simple
+  function (7.69 vs.\ 7.88).  The early-type deficit for the CODA model
+  reflects the 10\% discrepancy in $\az$ that most strongly affects
+  high-acceleration early-type galaxies near the transition.}
+\label{tab:hubble}
+\end{table}
+
+\subsection{The discriminant at Euclid precision}
+
+The two interpolating functions differ at the transition $\aN=\az$:
+\begin{equation}
+  \mu_{\tanh}(1) = \tanh(1) \approx 0.762, \qquad
+  \mu_{\rm simple}(1) = 1/\sqrt{2} \approx 0.707 \quad (+7.7\%).
+  \label{eq:mu_transition}
+\end{equation}
+Individual rotation curves cannot resolve this difference at typical 20\%
+M/L uncertainty.  Euclid weak-lensing stacking in narrow $\ab/\az$ bins
+near the transition will reach $\sim5\%$ precision \cite{Amendola:2018,
+Desmond:2020}, making the discrimination accessible.
+
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Relation to existing MOND frameworks}
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{llcc}
+  \toprule
+  Function & $\mu(x)$ & $\mu(1)$ & Source \\
+  \midrule
+  CODA (this work) & $\tanh(x)$ & 0.762 &
+    Derived from $dC_K/dx$ \\
+  Simple & $x/\sqrt{1+x^2}$ & 0.707 &
+    Phenomenological \cite{Zhao:2006} \\
+  Standard & $x/(1+x)$ & 0.500 &
+    Original Milgrom \cite{Milgrom:1983a} \\
+  \bottomrule
+\end{tabular}
+\caption{Comparison of MOND interpolating functions.}
+\label{tab:mu}
+\end{table}
+
+The tanh function was previously used on phenomenological grounds
+\cite{Zhao:2006,Gentile:2011}; this paper provides the first derivation
+from a theoretical framework --- specifically as the derivative of the
+DSSYK Krylov complexity function.
+
+Among relativistic completions, AeST \cite{Skordis:2021} is the closest
+structural analogue.  AeST postulates a kinetic Lagrangian
+$\mathcal{F}(K_{\mu\nu\alpha\beta})$ for a vector field $A^\mu$ that
+reduces to AQUAL in the quasi-static limit.  CODA produces the same
+reduction with $F$ derived from $C_K=\log\cosh$ rather than postulated,
+and without introducing a fundamental vector field.  However, AeST's
+$A^\mu$ ensures lensing-dynamics equivalence by construction, while
+CODA's current framework does not guarantee this.  Constructing a CODA
+vector sector is an important open problem.
+
+Verlinde's emergent gravity \cite{Verlinde:2017} is the closest conceptual
+predecessor, deriving $\az\sim cH_0$ from the entropic response of de
+Sitter to mass concentrations.  CODA uses the Krylov complexity gradient
+instead of Verlinde's entropic displacement, and additionally determines
+$\mu$.  Whether $|\nabla\CK|$ and the entropic displacement are related
+is a natural direction for future work.
+
+\subsection{The $2\pi$ factor and the holographic dictionary}
+\label{sec:2pi}
+
+Routes~1--2 of \cref{sec:three_routes} give $\az=cH_0$; Route~3 gives
+$cH_0/2\pi$.  The discrepancy is the thermal normalisation of the
+de~Sitter temperature.  Resolving which route is correct requires the
+holographic dictionary: if the DSSYK boundary time responds to
+$|\nabla\Phi|$ (gradient), the thermal scale $\TdS=H_0/2\pi$ enters and
+Route~3 is selected.  If it responds to $|\Phi|$ (value), Routes~1--2
+give $cH_0$.  The non-analytic $|\Phi|^{3/2}$ term in \cref{eq:g_expand}
+provides evidence for gradient response --- and for Route~3 --- but a
+global proof requires the full bulk-to-boundary map.
+
+\subsection{Galaxy clusters and gravitational lensing}
+
+MOND without additional dark matter fails for galaxy clusters
+\cite{Angus:2006}.  The present work inherits this problem from MOND
+phenomenology.  A relativistic CODA framework with a vector sector may
+partially address it, analogously to AeST \cite{Skordis:2021}.
+
+\subsection{CMB and large-scale structure}
+
+The Weyl-squared term in \eqref{eq:Stotal} is Bach-flat in all Einstein
+geometries, giving corrections $(k/\Mpl)^2\sim10^{-114}$ at CMB scales.
+The MOND kinetic sector is suppressed at high redshift ($\aN\gg\az$
+everywhere before galaxy formation) and activates only in the
+low-acceleration regime of present-day galactic disks.  A full
+perturbation theory of the MOND sector is deferred to future work.
+
+% ============================================================
+\section{Conclusions}
+\label{sec:conclusions}
+
+The MOND interpolating function has been unknown theoretically for four
+decades.  We have shown that it can be derived from holographic Krylov
+complexity in de~Sitter spacetime.  The derivation produces
+$\mu(x)=\tanh(x)$ as the derivative of the DSSYK classical complexity
+function $C_K(x)=\log\cosh(x)$, and the Milgrom scale
+$\az=cH_0/2\pi$ from the de~Sitter temperature --- both without free
+parameters.
+
+Three results make the derivation concrete:
+
+\begin{enumerate}
+  \item \textbf{The Krylov complexity density in $\dS{4}$.}
+    The DSSYK limiting extremal surface sits at
+    $\tausk=\sqrt{3/2}$ and gives
+    $\CKz=2/(3\sqrt{3}\,\GN\ell^2)$: finite, covariant, $[L^{-4}]$,
+    state-independent.
+
+  \item \textbf{The double degeneracy and the gradient relation.}
+    Both $\partial f/\partial\tau|_*$ and $g'(\tausk)$ vanish
+    simultaneously, forcing $(\delta\tausk)^2=-3\Phi/4$ and the gradient
+    relation $|\nabla\CK|=\kap\aN$.  The coupling $\kap$ cancels
+    identically in the AQUAL action.
+
+  \item \textbf{Tanh from log cosh.}
+    $\mu(x)=dC_K/dx=\tanh(x)$ with correct deep-MOND and Newtonian
+    limits.  The BTFR $v_c^4=\az GM_b$ follows in the deep-MOND limit.
+\end{enumerate}
+
+Testing against 175 SPARC galaxies with no free parameters, we find fits
+competitive with the standard simple function.  In the most important
+regime --- dwarf galaxies deep in the MOND limit --- $\mu=\tanh$
+narrowly outperforms simple (median $\chi^2_r$ 7.69 vs.\ 7.88).  The
+7.7\% difference at the transition is accessible to Euclid weak-lensing
+stacking.
+
+The primary open problem is deriving the AQUAL form of the kinetic action
+from the DSSYK second variation.  The evidence is in hand: the
+non-analytic $|\Phi|^{3/2}$ term has the correct deep-MOND power, and
+$\lambda_0=7/3$ shows the MOND signal is a non-analytic family effect, not
+a Jacobi instability.  Closing this step --- mapping $|\Phi|^{3/2}$ in
+the DSSYK generating functional to $F(\aN^2/\az^2)$ via the holographic
+dictionary --- would complete the first-principles derivation of MOND from
+quantum complexity.
+
+% ============================================================
+% Figures (placeholders — generate from sparc_simulation.py)
+% ============================================================
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/fig1_mu_comparison.pdf}
+  \caption{MOND interpolating functions $\mu(x)$ vs.\ $x=\aN/\az$.
+    Solid blue: CODA, $\mu=\tanh(x)$, derived from
+    $dC_K/dx$ with $C_K=\log\cosh$.
+    Dashed green: simple, $\mu=x/\sqrt{1+x^2}$ \cite{Zhao:2006}.
+    Dotted orange: standard, $\mu=x/(1+x)$ \cite{Milgrom:1983a}.
+    Vertical line: MOND transition $x=1$.
+    At transition: $\mu_{\tanh}(1)=0.762$ vs.\
+    $\mu_{\rm simple}(1)=0.707$ --- a $+7.7\%$ difference accessible to
+    Euclid weak-lensing stacking.}
+  \label{fig:mu}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/fig2_RAR.pdf}
+  \caption{Radial Acceleration Relation for all 175 SPARC galaxies
+    (3391 data points, grey).  Solid blue: CODA tanh,
+    $\az=cH_0/2\pi=1.082\times10^{-10}\,\si{m.s^{-2}}$.
+    Dashed green: tanh, $\az=\az^{\rm obs}=1.2\times10^{-10}\,\si{m.s^{-2}}$.
+    Dashed and dotted white lines: deep-MOND asymptote
+    $\aobs=\sqrt{\ab\az}$ and Newtonian limit $\aobs=\ab$, respectively.
+    Axes normalised to $\az^{\rm obs}$.}
+  \label{fig:RAR}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig3_rotation_curves.pdf}
+  \caption{Rotation curves for six representative SPARC galaxies spanning
+    the Hubble sequence: NGC\,3198 (Sd), NGC\,6503 (Sc), DDO\,154 (Im),
+    NGC\,7331 (Sb), UGC\,2885 (Sc), IC\,2574 (Sm).
+    White circles: observed $v_c\pm\sigma$.
+    Solid blue: CODA tanh, $\az=cH_0/2\pi$.
+    Dashed green: tanh, $\az=\az^{\rm obs}$.
+    Dotted orange: simple $\mu$.
+    Dash-dotted gold: baryonic Newtonian prediction.
+    Inset $\chi^2_r$: CODA $|$ tanh $|$ simple.}
+  \label{fig:rotation_curves}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/fig4_delta_chi2.pdf}
+  \caption{$\chi^2_r(\tanh)-\chi^2_r({\rm simple})$ per galaxy, ranked.
+    Blue bars: $\tanh$ better; orange bars: simple better.
+    Dashed yellow line: mean difference $+2.74$.
+    The 74 galaxies where tanh outperforms simple are concentrated in
+    the dwarf/deep-MOND regime.}
+  \label{fig:delta_chi2}
+\end{figure}
+
+% ============================================================
+\section*{Acknowledgements}
+
+The author thanks the developers of the SPARC database (F.\ Lelli,
+S.S.\ McGaugh, J.M.\ Schombert) for making rotation curve and photometry
+data publicly available, and the authors of arXiv:2510.13986 and
+arXiv:2403.13186 whose holographic Krylov complexity programme this work
+directly extends to four dimensions.
+
+% ============================================================
+\bibliographystyle{JHEP}
+\begin{thebibliography}{99}
+
+\bibitem{Milgrom:1983a}
+  M.~Milgrom,
+  \emph{A modification of the Newtonian dynamics as a possible alternative to
+  the hidden mass hypothesis},
+  Astrophys.\ J.\ \textbf{270} (1983) 365.
+
+\bibitem{Milgrom:1983b}
+  M.~Milgrom,
+  \emph{A modification of the Newtonian dynamics --- implications for galaxies},
+  Astrophys.\ J.\ \textbf{270} (1983) 371.
+
+\bibitem{Lelli:2016}
+  F.~Lelli, S.S.~McGaugh and J.M.~Schombert,
+  \emph{SPARC: Mass models for 175 disk galaxies with Spitzer photometry and
+  accurate rotation curves},
+  Astron.\ J.\ \textbf{152} (2016) 157 [arXiv:1606.09251].
+
+\bibitem{Verheijen:2001}
+  M.A.W.~Verheijen,
+  \emph{The Ursa Major cluster of galaxies. V. HI rotation curve shapes and
+  the Tully-Fisher relations},
+  Astrophys.\ J.\ \textbf{563} (2001) 694.
+
+\bibitem{McGaugh:2005}
+  S.S.~McGaugh,
+  \emph{The baryonic Tully-Fisher relation of galaxies with extended rotation
+  curves and the stellar mass of rotating galaxies},
+  Astrophys.\ J.\ \textbf{632} (2005) 859 [arXiv:astro-ph/0506750].
+
+\bibitem{McGaugh:2016}
+  S.S.~McGaugh, F.~Lelli and J.M.~Schombert,
+  \emph{Radial acceleration relation in rotationally supported galaxies},
+  Phys.\ Rev.\ Lett.\ \textbf{117} (2016) 201101 [arXiv:1609.05917].
+
+\bibitem{Milgrom:2023}
+  M.~Milgrom,
+  \emph{MOND and the seven dwarfs},
+  Phys.\ Rev.\ D \textbf{107} (2023) 044052.
+
+\bibitem{Zhao:2010}
+  H.S.~Zhao and B.~Li,
+  \emph{Dark fluid: A unified framework for modified dynamics and dark energy},
+  Astrophys.\ J.\ \textbf{712} (2010) 130.
+
+\bibitem{Verlinde:2017}
+  E.~Verlinde,
+  \emph{Emergent gravity and the dark universe},
+  SciPost Phys.\ \textbf{2} (2017) 016 [arXiv:1611.02269].
+
+\bibitem{Skordis:2021}
+  C.~Skordis and T.~Z{\l}o{\'s}nik,
+  \emph{New relativistic theory for modified Newtonian dynamics},
+  Phys.\ Rev.\ Lett.\ \textbf{127} (2021) 161302 [arXiv:2007.00082].
+
+\bibitem{Bekenstein:2004}
+  J.D.~Bekenstein,
+  \emph{Relativistic gravitation theory for the modified Newtonian dynamics
+  paradigm},
+  Phys.\ Rev.\ D \textbf{70} (2004) 083509 [arXiv:astro-ph/0403694].
+
+\bibitem{Deffayet:2011}
+  C.~Deffayet, G.~Esposito-Far{\`e}se and R.~Woodard,
+  \emph{Nonlocal metric formulations of MOND with sufficient lensing},
+  Phys.\ Rev.\ D \textbf{84} (2011) 124054.
+
+\bibitem{Parker:2019}
+  D.E.~Parker, X.~Cao, A.~Avdoshkin, T.~Scaffidi and E.~Altman,
+  \emph{A universal operator growth hypothesis},
+  Phys.\ Rev.\ X \textbf{9} (2019) 041017 [arXiv:1812.02666].
+
+\bibitem{Avdoshkin:2022}
+  A.~Avdoshkin, A.~Dymarsky and M.~Smolkin,
+  \emph{Krylov complexity in quantum field theory, and beyond},
+  arXiv:2212.14429 (2022).
+
+\bibitem{Heller:2025}
+  M.P.~Heller, A.~Ori, P.~Papalini, L.~Schuhmann and Y.~Wang,
+  \emph{Holographic Krylov complexity in de~Sitter space from
+  double-scaled SYK},
+  arXiv:2510.13986 (2025).
+
+\bibitem{Aguilar:2024}
+  S.E.~Aguilar-Gutierrez,
+  \emph{Complexity in de~Sitter space from the double-scaled SYK model},
+  JHEP \textbf{10} (2024) 107 [arXiv:2403.13186].
+
+\bibitem{Zhao:2006}
+  H.S.~Zhao and B.~Famaey,
+  \emph{Refining the MOND interpolating function and TeVeS Lagrangian},
+  Astrophys.\ J.\ \textbf{638} (2006) L9 [arXiv:astro-ph/0512425].
+
+\bibitem{Famaey:2012}
+  B.~Famaey and S.S.~McGaugh,
+  \emph{Modified Newtonian dynamics (MOND): observational phenomenology
+  and relativistic extensions},
+  Living Rev.\ Rel.\ \textbf{15} (2012) 10 [arXiv:1112.3960].
+
+\bibitem{Blommaert:2024}
+  A.~Blommaert, T.G.~Mertens and P.~Papalini,
+  \emph{DSSYK in the bulk: from Schwarzian to dilaton gravity},
+  arXiv:2404.03535 (2024).
+
+\bibitem{Brown:2016}
+  A.R.~Brown, D.A.~Roberts, L.~Susskind, B.~Swingle and Y.~Zhao,
+  \emph{Holographic complexity equals bulk action?},
+  Phys.\ Rev.\ Lett.\ \textbf{116} (2016) 191301 [arXiv:1509.07876].
+
+\bibitem{Riess:2022}
+  A.G.~Riess et~al.,
+  \emph{A comprehensive measurement of the local value of the Hubble
+  constant with 1\,km/s/Mpc uncertainty from HST and the SH0ES team},
+  Astrophys.\ J.\ Lett.\ \textbf{934} (2022) L7 [arXiv:2112.04510].
+
+\bibitem{Bekenstein:1984}
+  J.D.~Bekenstein and M.~Milgrom,
+  \emph{Does the missing mass problem signal the breakdown of Newtonian
+  gravity?},
+  Astrophys.\ J.\ \textbf{286} (1984) 7.
+
+\bibitem{Stelle:1977}
+  K.S.~Stelle,
+  \emph{Renormalization of higher-derivative quantum gravity},
+  Phys.\ Rev.\ D \textbf{16} (1977) 953.
+
+\bibitem{Schombert:2020}
+  J.~Schombert, S.S.~McGaugh and J.~Lelli,
+  \emph{Using the baryonic Tully-Fisher relation to measure $H_0$},
+  Astron.\ J.\ \textbf{160} (2020) 71.
+
+\bibitem{Amendola:2018}
+  L.~Amendola et~al.\ (Euclid Theory Working Group),
+  \emph{Cosmology and fundamental physics with the Euclid satellite},
+  Living Rev.\ Rel.\ \textbf{21} (2018) 2 [arXiv:1606.00180].
+
+\bibitem{Desmond:2020}
+  C.~Desmond and P.G.~Ferreira,
+  \emph{Galaxy morphology rules out Mond},
+  Phys.\ Rev.\ D \textbf{102} (2020) 104060.
+
+\bibitem{Gentile:2011}
+  G.~Gentile, B.~Famaey and W.J.G.~de~Blok,
+  \emph{THINGS about MOND},
+  Astron.\ Astrophys.\ \textbf{527} (2011) A76 [arXiv:1011.4148].
+
+\bibitem{Lelli:2017}
+  F.~Lelli, S.S.~McGaugh, J.M.~Schombert and M.S.~Pawlowski,
+  \emph{One law to rule them all: the radial acceleration relation of
+  galaxies},
+  Astrophys.\ J.\ \textbf{836} (2017) 152 [arXiv:1610.08981].
+
+\bibitem{Angus:2006}
+  G.W.~Angus, B.~Famaey and H.S.~Zhao,
+  \emph{Can MOND take a bullet? Analytical comparisons of three versions of
+  MOND beyond spherical symmetry},
+  Mon.\ Not.\ Roy.\ Astron.\ Soc.\ \textbf{371} (2006) 138
+  [arXiv:astro-ph/0606216].
+
+\bibitem{Susskind:2022}
+  L.~Susskind,
+  \emph{De Sitter space, double-scaled SYK, and the separation of scales
+  in the principle of relativity},
+  arXiv:2209.09999 (2022).
+
+\bibitem{CODA:dict}
+  S.~Hartley,
+  \emph{Holographic dictionary for CODA: from DSSYK second variation to
+  AQUAL},
+  CODA project, \texttt{theory/holographic\_dictionary.md} (2026).
+
+\end{thebibliography}
+
+\end{document}
